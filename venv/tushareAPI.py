@@ -2,10 +2,11 @@
 import tushare as ts
 import openpyxl
 import matplotlib.pyplot as plt
-import mpl_finance as mpf
+import mplfinance as mpf
 import matplotlib.pyplot as plt
 import pandas as pd
-
+import time
+import datetime
 import matplotlib.ticker as ticker
 
 #df = ak.stock_zh_a_daily(symbol="sz002714", start_date="20201103", end_date="20210118",adjust="qfq")
@@ -21,15 +22,25 @@ pro = ts.pro_api('a0045b3469b1b145fb57a7b97467a49fd7deecdd299c21b6d9a5f64a',33)
 # ddf = pro.daily(ts_code='000001.SZ', start_date='20220701', end_date='20220718')
 
 # sdf = pro.query('daily', ts_code='600519.SH', start_date='20220201', end_date='20220712')
-
-
+now_time = datetime.datetime.now()
+last_date = now_time.strftime("%Y%m%d")
+begin_date = (now_time + datetime.timedelta(days=-10)).strftime("%Y%m%d")  # 获取前一天，这里有一个bug，交易日不一定是昨天
 
 ts.set_token('a0045b3469b1b145fb57a7b97467a49fd7deecdd299c21b6d9a5f64a')
-df = ts.pro_bar(ts_code='000777.SZ', start_date='20220801', end_date='20220920', ma=[5, 10, 20,30])
-print((df.ma5)[0])
-print((df.ma10)[0])
-print((df.ma20)[0])
-print((df.ma30)[0])
+#df = ts.pro_bar(ts_code='000777.SZ', start_date='20220801', end_date='20220920', ma=[5, 10, 20,30])
+
+trade_cal = pro.trade_cal(exchange='', start_date=begin_date, end_date=last_date)
+print(trade_cal)
+cruntent=trade_cal['pretrade_date']
+list(cruntent)
+print(cruntent[-1:])
+
+
+# print(df)
+# print((df.ma5)[0])
+# print((df.ma10)[0])
+# print((df.ma20)[0])
+#print((df.ma30)[0])
 
 
 # print (ddf)

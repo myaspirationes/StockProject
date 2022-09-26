@@ -12,17 +12,21 @@ import MySQLdb
 from sqlalchemy import create_engine
 
 import time
+import datetime
 
 now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 date = now[0:10] #获得查询日期用于插入数据库
 print(date)
 #设置开始和结束时间
-begin_date='20220919'
-last_date='20220920'
+now_time=datetime.datetime.now()
+begin_date=(now_time+datetime.timedelta(days=-1)).strftime("%Y%m%d")#获取后一天
+last_date=now_time.strftime("%Y%m%d")
+# 链接数据库方法一：
 connect = MySQLdb.connect("localhost", "root", "root", "test", charset='utf8')
 cursor = connect.cursor()
-
+#链接数据库方法二：
 engine_ts = create_engine('mysql://root:root@127.0.0.1:3306/test?charset=utf8&use_unicode=1')
+ts.set_token('a0045b3469b1b145fb57a7b97467a49fd7deecdd299c21b6d9a5f64a')
 
 # df = ak.stock_zh_a_daily(symbol="sz002714", start_date="20201103", end_date="20210118",adjust="qfq")
 #从接口拿数据
@@ -52,7 +56,6 @@ exceldata = pd.DataFrame(get_codes.keys())
 exceldata.to_excel("scanerStocks.xlsx")
 # print(get_codes.keys())
 # print(type(get_codes.keys()))
-
 #代码每500个一组，规避接口500个每分钟的限制
 arrays = []
 arrays = get_codes.keys()
@@ -85,6 +88,7 @@ array9 = arrays[-500:]
 #从接口拉取第一批500个股票的数据
 for array in array1:
     stock_dat = pro.daily(ts_code=array, start_date=begin_date, end_date=last_date)
+    print(stock_dat)
     for kl_index in np.arange(1, stock_dat.shape[0]):
         # today今天的股票信息
         # yesterday 昨天的股票信息
@@ -94,7 +98,7 @@ for array in array1:
         yesterday = yesterday.copy()
 
         today = today.copy()
-        # print("-----")
+        print("-----")
         #print(today)
 
         stock_code=today['ts_code'][0:7]
@@ -122,7 +126,7 @@ for array in array1:
             res = yesterdayfor.to_sql('three_times_vol_detail', engine_ts, index=False, if_exists='append', chunksize=5000)
 
         #2.存入3倍表中
-            sql_three_times = "insert into  three_times_vol (ts_code,times,date) value (%s,%s,%s)"
+            sql_three_times = "insert ignore into  three_times_vol (ts_code,times,date) value (%s,%s,%s)"
             param = (today.ts_code, Multiples, date)
 
             try:
@@ -132,7 +136,7 @@ for array in array1:
 
             # cursor.execute(sql2, skip_stock_code,date)
 
-                print("Add To Database  Success")
+                print("Three Times  Stock Add To Database  Success")
             # 提交到数据库执行
                 connect.commit()
             except:
@@ -151,7 +155,7 @@ for array in array1:
 
             # sql = "INSERT INTO skip_stock (ts_code) values(%s)"
             # sql2 = "INSERT INTO skip_stock values(%s,%s)"
-            sql2 = "insert into skip_stock (ts_code, date) VALUES (%s, %s)"
+            sql2 = "insert ignore into skip_stock (ts_code, date) VALUES (%s, %s)"
             val = (skip_stock_code, date)
 
             try:
@@ -169,54 +173,79 @@ for array in array1:
                 connect.rollback()
 
 
-        #========================>第三个if：一阳三线的股票 存入数据库（速度太慢了）
+        #========================>第三个if：一阳三线的股票 存入数据库（sql计算5,10,20日均线速度太慢了）
 
-        #查询并计算5日、10日、20日、30日均线值
-        sqlfive =  "select avg (tt.close) avg5 ,tt.ts_code,tt.trade_date from (select t.close,t.ts_code ,t.trade_date from trade_details_2022 t where t.ts_code={} and " \
-                   " t.trade_date<={} order by t.trade_date  desc  limit 5)as tt".format( stock_code ,trade_day)
-        df5 = pd.read_sql_query(sqlfive, engine_ts)
-        # print(df5)
-        average5 = pd.DataFrame(df5)
-        avg5= average5.get('avg5')#获取到5日均值
-        # print('5日线值：%s'%avg5)
-        # print(avg5)
-        # print(type(float(avg5)))
-        # print(type(today['open']))
+        df = ts.pro_bar(ts_code=today['ts_code'], start_date='20220801', end_date=last_date, ma=[5, 10, 20, 30])
+        # print(df)
+        # print(df.ma5)
+        lines_5=(df.ma5)[0]
+        # print(lines_5)
 
-        sql10 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 10)as tt".format(stock_code ,trade_day)
-        df10 = pd.read_sql_query(sql10, engine_ts)
+        if(today['open']<(df.ma5)[0] and today['open']<(df.ma10)[0] and today['open']<(df.ma20)[0]and(today['close']>(df.ma5)[0] and today['close']>(df.ma10)[0] and today['close']>(df.ma20)[0])):
+            sql_three_lines = "insert ignore into  break_3_lines (ts_code,trade_date,avg5) value (%s,%s,%s)"
+            param = (today.ts_code, date,lines_5)
 
-        # print(df10)
-        average10 = pd.DataFrame(df10)
-        avg10=average10.get('avg (tt.close)')#获取到10日均值
-        # print('10日线值：%s'%avg10)
+            try:
+                # 执行sql语句
+                cursor.execute(sql_three_lines, param)
+                print("Add To Database  Success")
+                # 提交到数据库执行
+                connect.commit()
+            except:
+                # 发生错误时回滚
+                connect.rollback()
 
-
-        sql20 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 20)as tt".format(stock_code ,trade_day)
-        df20 = pd.read_sql_query(sql20, engine_ts)
-        average20 = pd.DataFrame(df20)
-        avg20=average20.get('avg (tt.close)')#获取到20日均值
-        # print('20日线值：%s'%avg20)
-
-
-        # sql30 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-        #         " t.trade_date<={} order by t.trade_date  desc  limit 30)as tt".format(stock_code ,trade_day)
-        # df30 = pd.read_sql_query(sql30, engine_ts)
-        # average30 = pd.DataFrame(df30)
-        # avg30=average30.get('avg (tt.close)')#获取到30日均值
-        # print('30日线值：%s'%avg30)
-
-
-
-
-        if (today['open']<float(avg5) and today['open']<float(avg10) and today['open']<float(avg20))and(today['close']>float(avg5) and today['close']>float(avg10) and today['close']>float(avg20)):
-            res = df5.to_sql('break_3_lines', engine_ts, index=False, if_exists='append', chunksize=5000)
-            print("********************===  抓到一个 一阳三线 了!  ===**********************")
-
-
-time.sleep(60)#规避接口500次/min的限制
+            print("********************===  抓到一个 一阳三线 了!====>>> %s ===**********************"%today.ts_code)
+#
+#
+#
+#         #
+#         # #查询并计算5日、10日、20日、30日均线值
+#         # sqlfive =  "select avg (tt.close) avg5 ,tt.ts_code,tt.trade_date from (select t.close,t.ts_code ,t.trade_date from trade_details_2022 t where t.ts_code={} and " \
+#         #            " t.trade_date<={} order by t.trade_date  desc  limit 5)as tt".format( stock_code ,trade_day)
+#         # df5 = pd.read_sql_query(sqlfive, engine_ts)
+#         # # print(df5)
+#         # average5 = pd.DataFrame(df5)
+#         # avg5= average5.get('avg5')#获取到5日均值
+#         # # print('5日线值：%s'%avg5)
+#         # # print(avg5)
+#         # # print(type(float(avg5)))
+#         # # print(type(today['open']))
+#         #
+#         # sql10 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
+#         #         " t.trade_date<={} order by t.trade_date  desc  limit 10)as tt".format(stock_code ,trade_day)
+#         # df10 = pd.read_sql_query(sql10, engine_ts)
+#         #
+#         # # print(df10)
+#         # average10 = pd.DataFrame(df10)
+#         # avg10=average10.get('avg (tt.close)')#获取到10日均值
+#         # # print('10日线值：%s'%avg10)
+#         #
+#         #
+#         # sql20 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
+#         #         " t.trade_date<={} order by t.trade_date  desc  limit 20)as tt".format(stock_code ,trade_day)
+#         # df20 = pd.read_sql_query(sql20, engine_ts)
+#         # average20 = pd.DataFrame(df20)
+#         # avg20=average20.get('avg (tt.close)')#获取到20日均值
+#         # # print('20日线值：%s'%avg20)
+#         #
+#         #
+#         # # sql30 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
+#         # #         " t.trade_date<={} order by t.trade_date  desc  limit 30)as tt".format(stock_code ,trade_day)
+#         # # df30 = pd.read_sql_query(sql30, engine_ts)
+#         # # average30 = pd.DataFrame(df30)
+#         # # avg30=average30.get('avg (tt.close)')#获取到30日均值
+#         # # print('30日线值：%s'%avg30)
+#         #
+#         #
+#         #
+#         #
+#         # if (today['open']<float(avg5) and today['open']<float(avg10) and today['open']<float(avg20))and(today['close']>float(avg5) and today['close']>float(avg10) and today['close']>float(avg20)):
+#         #     res = df5.to_sql('break_3_lines', engine_ts, index=False, if_exists='append', chunksize=5000)
+#         #     print("********************===  抓到一个 一阳三线 了!  ===**********************")
+#
+#
+#time.sleep(10)#规避接口500次/min的限制
 
 for array in array2:
     stock_dat = pro.daily(ts_code=array, start_date=begin_date, end_date=last_date)
@@ -306,51 +335,30 @@ for array in array2:
 
         #========================>第三个if：一阳三线的股票 存入数据库（速度太慢了）
 
-        #查询并计算5日、10日、20日、30日均线值
-        sqlfive =  "select avg (tt.close) avg5 ,tt.ts_code,tt.trade_date from (select t.close,t.ts_code ,t.trade_date from trade_details_2022 t where t.ts_code={} and " \
-                   " t.trade_date<={} order by t.trade_date  desc  limit 5)as tt".format( stock_code ,trade_day)
-        df5 = pd.read_sql_query(sqlfive, engine_ts)
-        # print(df5)
-        average5 = pd.DataFrame(df5)
-        avg5= average5.get('avg5')#获取到5日均值
-        # print('5日线值：%s'%avg5)
-        # print(avg5)
-        # print(type(float(avg5)))
-        # print(type(today['open']))
+        df = ts.pro_bar(ts_code=today['ts_code'], start_date='20220801', end_date=last_date, ma=[5, 10, 20, 30])
+        # print(df)
+        # print(df.ma5)
+        lines_5 = (df.ma5)[0]
+    # print(lines_5)
 
-        sql10 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 10)as tt".format(stock_code ,trade_day)
-        df10 = pd.read_sql_query(sql10, engine_ts)
+        if (today['open'] < (df.ma5)[0] and today['open'] < (df.ma10)[0] and today['open'] < (df.ma20)[0] and (
+            today['close'] > (df.ma5)[0] and today['close'] > (df.ma10)[0] and today['close'] > (df.ma20)[0])):
+            sql_three_lines = "insert into  break_3_lines (ts_code,trade_date,avg5) value (%s,%s,%s)"
+            param = (today.ts_code, date, lines_5)
 
-        # print(df10)
-        average10 = pd.DataFrame(df10)
-        avg10=average10.get('avg (tt.close)')#获取到10日均值
-        # print('10日线值：%s'%avg10)
+            try:
+            # 执行sql语句
+                cursor.execute(sql_three_lines, param)
+                print("Add To Database  Success")
+            # 提交到数据库执行
+                connect.commit()
+            except:
+            # 发生错误时回滚
+                connect.rollback()
 
+            print("********************===  抓到一个 一阳三线 了!====>>> %s ===**********************" % today.ts_code)
 
-        sql20 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 20)as tt".format(stock_code ,trade_day)
-        df20 = pd.read_sql_query(sql20, engine_ts)
-        average20 = pd.DataFrame(df20)
-        avg20=average20.get('avg (tt.close)')#获取到20日均值
-        # print('20日线值：%s'%avg20)
-
-
-        # sql30 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-        #         " t.trade_date<={} order by t.trade_date  desc  limit 30)as tt".format(stock_code ,trade_day)
-        # df30 = pd.read_sql_query(sql30, engine_ts)
-        # average30 = pd.DataFrame(df30)
-        # avg30=average30.get('avg (tt.close)')#获取到30日均值
-        # print('30日线值：%s'%avg30)
-
-
-
-
-        if (today['open']<float(avg5) and today['open']<float(avg10) and today['open']<float(avg20))and(today['close']>float(avg5) and today['close']>float(avg10) and today['close']>float(avg20)):
-            res = df5.to_sql('break_3_lines', engine_ts, index=False, if_exists='append', chunksize=5000)
-            print("********************===  抓到一个 一阳三线 了!  ===**********************")
-
-time.sleep(60)#规避接口500次/min的限制
+time.sleep(2)#规避接口500次/min的限制
 
 for array in array3:
     stock_dat = pro.daily(ts_code=array, start_date=begin_date, end_date=last_date)
@@ -439,52 +447,30 @@ for array in array3:
 
 
         #========================>第三个if：一阳三线的股票 存入数据库（速度太慢了）
+        df = ts.pro_bar(ts_code=today['ts_code'], start_date='20220801', end_date=last_date, ma=[5, 10, 20, 30])
+        # print(df)
+        # print(df.ma5)
+        lines_5 = (df.ma5)[0]
+        # print(lines_5)
 
-        #查询并计算5日、10日、20日、30日均线值
-        sqlfive =  "select avg (tt.close) avg5 ,tt.ts_code,tt.trade_date from (select t.close,t.ts_code ,t.trade_date from trade_details_2022 t where t.ts_code={} and " \
-                   " t.trade_date<={} order by t.trade_date  desc  limit 5)as tt".format( stock_code ,trade_day)
-        df5 = pd.read_sql_query(sqlfive, engine_ts)
-        # print(df5)
-        average5 = pd.DataFrame(df5)
-        avg5= average5.get('avg5')#获取到5日均值
-        # print('5日线值：%s'%avg5)
-        # print(avg5)
-        # print(type(float(avg5)))
-        # print(type(today['open']))
+        if (today['open'] < (df.ma5)[0] and today['open'] < (df.ma10)[0] and today['open'] < (df.ma20)[0] and (
+                today['close'] > (df.ma5)[0] and today['close'] > (df.ma10)[0] and today['close'] > (df.ma20)[0])):
+            sql_three_lines = "insert into  break_3_lines (ts_code,trade_date,avg5) value (%s,%s,%s)"
+            param = (today.ts_code, date, lines_5)
 
-        sql10 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 10)as tt".format(stock_code ,trade_day)
-        df10 = pd.read_sql_query(sql10, engine_ts)
+            try:
+                # 执行sql语句
+                cursor.execute(sql_three_lines, param)
+                print("Add To Database  Success")
+                # 提交到数据库执行
+                connect.commit()
+            except:
+                # 发生错误时回滚
+                connect.rollback()
 
-        # print(df10)
-        average10 = pd.DataFrame(df10)
-        avg10=average10.get('avg (tt.close)')#获取到10日均值
-        # print('10日线值：%s'%avg10)
+            print("********************===  抓到一个 一阳三线 了!====>>> %s ===**********************" % today.ts_code)
 
-
-        sql20 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 20)as tt".format(stock_code ,trade_day)
-        df20 = pd.read_sql_query(sql20, engine_ts)
-        average20 = pd.DataFrame(df20)
-        avg20=average20.get('avg (tt.close)')#获取到20日均值
-        # print('20日线值：%s'%avg20)
-
-
-        # sql30 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-        #         " t.trade_date<={} order by t.trade_date  desc  limit 30)as tt".format(stock_code ,trade_day)
-        # df30 = pd.read_sql_query(sql30, engine_ts)
-        # average30 = pd.DataFrame(df30)
-        # avg30=average30.get('avg (tt.close)')#获取到30日均值
-        # print('30日线值：%s'%avg30)
-
-
-
-
-        if (today['open']<float(avg5) and today['open']<float(avg10) and today['open']<float(avg20))and(today['close']>float(avg5) and today['close']>float(avg10) and today['close']>float(avg20)):
-            res = df5.to_sql('break_3_lines', engine_ts, index=False, if_exists='append', chunksize=5000)
-            print("********************===  抓到一个 一阳三线 了!  ===**********************")
-
-time.sleep(60)#规避接口500次/min的限制
+#time.sleep(10)#规避接口500次/min的限制
 
 for array in array4:
     stock_dat = pro.daily(ts_code=array, start_date=begin_date, end_date=last_date)
@@ -573,52 +559,30 @@ for array in array4:
 
 
         #========================>第三个if：一阳三线的股票 存入数据库（速度太慢了）
+        df = ts.pro_bar(ts_code=today['ts_code'], start_date='20220801', end_date=last_date, ma=[5, 10, 20, 30])
+        # print(df)
+        # print(df.ma5)
+        lines_5=(df.ma5)[0]
+        # print(lines_5)
 
-        #查询并计算5日、10日、20日、30日均线值
-        sqlfive =  "select avg (tt.close) avg5 ,tt.ts_code,tt.trade_date from (select t.close,t.ts_code ,t.trade_date from trade_details_2022 t where t.ts_code={} and " \
-                   " t.trade_date<={} order by t.trade_date  desc  limit 5)as tt".format( stock_code ,trade_day)
-        df5 = pd.read_sql_query(sqlfive, engine_ts)
-        # print(df5)
-        average5 = pd.DataFrame(df5)
-        avg5= average5.get('avg5')#获取到5日均值
-        # print('5日线值：%s'%avg5)
-        # print(avg5)
-        # print(type(float(avg5)))
-        # print(type(today['open']))
+        if(today['open']<(df.ma5)[0] and today['open']<(df.ma10)[0] and today['open']<(df.ma20)[0]and(today['close']>(df.ma5)[0] and today['close']>(df.ma10)[0] and today['close']>(df.ma20)[0])):
+            sql_three_lines = "insert into  break_3_lines (ts_code,trade_date,avg5) value (%s,%s,%s)"
+            param = (today.ts_code, date,lines_5)
 
-        sql10 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 10)as tt".format(stock_code ,trade_day)
-        df10 = pd.read_sql_query(sql10, engine_ts)
+            try:
+                # 执行sql语句
+                cursor.execute(sql_three_lines, param)
+                print("Add To Database  Success")
+                # 提交到数据库执行
+                connect.commit()
+            except:
+                # 发生错误时回滚
+                connect.rollback()
 
-        # print(df10)
-        average10 = pd.DataFrame(df10)
-        avg10=average10.get('avg (tt.close)')#获取到10日均值
-        # print('10日线值：%s'%avg10)
-
-
-        sql20 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 20)as tt".format(stock_code ,trade_day)
-        df20 = pd.read_sql_query(sql20, engine_ts)
-        average20 = pd.DataFrame(df20)
-        avg20=average20.get('avg (tt.close)')#获取到20日均值
-        # print('20日线值：%s'%avg20)
+            print("********************===  抓到一个 一阳三线 了!====>>> %s ===**********************"%today.ts_code)
 
 
-        # sql30 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-        #         " t.trade_date<={} order by t.trade_date  desc  limit 30)as tt".format(stock_code ,trade_day)
-        # df30 = pd.read_sql_query(sql30, engine_ts)
-        # average30 = pd.DataFrame(df30)
-        # avg30=average30.get('avg (tt.close)')#获取到30日均值
-        # print('30日线值：%s'%avg30)
-
-
-
-
-        if (today['open']<float(avg5) and today['open']<float(avg10) and today['open']<float(avg20))and(today['close']>float(avg5) and today['close']>float(avg10) and today['close']>float(avg20)):
-            res = df5.to_sql('break_3_lines', engine_ts, index=False, if_exists='append', chunksize=5000)
-            print("********************===  抓到一个 一阳三线 了!  ===**********************")
-
-time.sleep(60)#规避接口500次/min的限制
+#time.sleep(10)#规避接口500次/min的限制
 
 for array in array5:
     stock_dat = pro.daily(ts_code=array, start_date=begin_date, end_date=last_date)
@@ -708,51 +672,32 @@ for array in array5:
 
         #========================>第三个if：一阳三线的股票 存入数据库（速度太慢了）
 
-        #查询并计算5日、10日、20日、30日均线值
-        sqlfive =  "select avg (tt.close) avg5 ,tt.ts_code,tt.trade_date from (select t.close,t.ts_code ,t.trade_date from trade_details_2022 t where t.ts_code={} and " \
-                   " t.trade_date<={} order by t.trade_date  desc  limit 5)as tt".format( stock_code ,trade_day)
-        df5 = pd.read_sql_query(sqlfive, engine_ts)
-        # print(df5)
-        average5 = pd.DataFrame(df5)
-        avg5= average5.get('avg5')#获取到5日均值
-        # print('5日线值：%s'%avg5)
-        # print(avg5)
-        # print(type(float(avg5)))
-        # print(type(today['open']))
 
-        sql10 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 10)as tt".format(stock_code ,trade_day)
-        df10 = pd.read_sql_query(sql10, engine_ts)
+        #========================>第三个if：一阳三线的股票 存入数据库（速度太慢了）
+        df = ts.pro_bar(ts_code=today['ts_code'], start_date='20220801', end_date=last_date, ma=[5, 10, 20, 30])
+        # print(df)
+        # print(df.ma5)
+        lines_5 = (df.ma5)[0]
+        # print(lines_5)
 
-        # print(df10)
-        average10 = pd.DataFrame(df10)
-        avg10=average10.get('avg (tt.close)')#获取到10日均值
-        # print('10日线值：%s'%avg10)
+        if (today['open'] < (df.ma5)[0] and today['open'] < (df.ma10)[0] and today['open'] < (df.ma20)[0] and (
+                today['close'] > (df.ma5)[0] and today['close'] > (df.ma10)[0] and today['close'] > (df.ma20)[0])):
+            sql_three_lines = "insert into  break_3_lines (ts_code,trade_date,avg5) value (%s,%s,%s)"
+            param = (today.ts_code, date, lines_5)
 
+            try:
+                # 执行sql语句
+                cursor.execute(sql_three_lines, param)
+                print("Add To Database  Success")
+                # 提交到数据库执行
+                connect.commit()
+            except:
+                # 发生错误时回滚
+                connect.rollback()
 
-        sql20 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 20)as tt".format(stock_code ,trade_day)
-        df20 = pd.read_sql_query(sql20, engine_ts)
-        average20 = pd.DataFrame(df20)
-        avg20=average20.get('avg (tt.close)')#获取到20日均值
-        # print('20日线值：%s'%avg20)
+            print("********************===  抓到一个 一阳三线 了!====>>> %s ===**********************" % today.ts_code)
 
-
-        # sql30 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-        #         " t.trade_date<={} order by t.trade_date  desc  limit 30)as tt".format(stock_code ,trade_day)
-        # df30 = pd.read_sql_query(sql30, engine_ts)
-        # average30 = pd.DataFrame(df30)
-        # avg30=average30.get('avg (tt.close)')#获取到30日均值
-        # print('30日线值：%s'%avg30)
-
-
-
-
-        if (today['open']<float(avg5) and today['open']<float(avg10) and today['open']<float(avg20))and(today['close']>float(avg5) and today['close']>float(avg10) and today['close']>float(avg20)):
-            res = df5.to_sql('break_3_lines', engine_ts, index=False, if_exists='append', chunksize=5000)
-            print("********************===  抓到一个 一阳三线 了!  ===**********************")
-
-time.sleep(60)#规避接口500次/min的限制
+#time.sleep(10)#规避接口500次/min的限制
 
 for array in array6:
     stock_dat = pro.daily(ts_code=array, start_date=begin_date, end_date=last_date)
@@ -842,51 +787,31 @@ for array in array6:
 
         #========================>第三个if：一阳三线的股票 存入数据库（速度太慢了）
 
-        #查询并计算5日、10日、20日、30日均线值
-        sqlfive =  "select avg (tt.close) avg5 ,tt.ts_code,tt.trade_date from (select t.close,t.ts_code ,t.trade_date from trade_details_2022 t where t.ts_code={} and " \
-                   " t.trade_date<={} order by t.trade_date  desc  limit 5)as tt".format( stock_code ,trade_day)
-        df5 = pd.read_sql_query(sqlfive, engine_ts)
-        # print(df5)
-        average5 = pd.DataFrame(df5)
-        avg5= average5.get('avg5')#获取到5日均值
-        # print('5日线值：%s'%avg5)
-        # print(avg5)
-        # print(type(float(avg5)))
-        # print(type(today['open']))
+        #========================>第三个if：一阳三线的股票 存入数据库（速度太慢了）
+        df = ts.pro_bar(ts_code=today['ts_code'], start_date='20220801', end_date=last_date, ma=[5, 10, 20, 30])
+        # print(df)
+        # print(df.ma5)
+        lines_5 = (df.ma5)[0]
+        # print(lines_5)
 
-        sql10 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 10)as tt".format(stock_code ,trade_day)
-        df10 = pd.read_sql_query(sql10, engine_ts)
+        if (today['open'] < (df.ma5)[0] and today['open'] < (df.ma10)[0] and today['open'] < (df.ma20)[0] and (
+                today['close'] > (df.ma5)[0] and today['close'] > (df.ma10)[0] and today['close'] > (df.ma20)[0])):
+            sql_three_lines = "insert into  break_3_lines (ts_code,trade_date,avg5) value (%s,%s,%s)"
+            param = (today.ts_code, date, lines_5)
 
-        # print(df10)
-        average10 = pd.DataFrame(df10)
-        avg10=average10.get('avg (tt.close)')#获取到10日均值
-        # print('10日线值：%s'%avg10)
+            try:
+                # 执行sql语句
+                cursor.execute(sql_three_lines, param)
+                print("Add To Database  Success")
+                # 提交到数据库执行
+                connect.commit()
+            except:
+                # 发生错误时回滚
+                connect.rollback()
 
+            print("********************===  抓到一个 一阳三线 了!====>>> %s ===**********************" % today.ts_code)
 
-        sql20 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 20)as tt".format(stock_code ,trade_day)
-        df20 = pd.read_sql_query(sql20, engine_ts)
-        average20 = pd.DataFrame(df20)
-        avg20=average20.get('avg (tt.close)')#获取到20日均值
-        # print('20日线值：%s'%avg20)
-
-
-        # sql30 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-        #         " t.trade_date<={} order by t.trade_date  desc  limit 30)as tt".format(stock_code ,trade_day)
-        # df30 = pd.read_sql_query(sql30, engine_ts)
-        # average30 = pd.DataFrame(df30)
-        # avg30=average30.get('avg (tt.close)')#获取到30日均值
-        # print('30日线值：%s'%avg30)
-
-
-
-
-        if (today['open']<float(avg5) and today['open']<float(avg10) and today['open']<float(avg20))and(today['close']>float(avg5) and today['close']>float(avg10) and today['close']>float(avg20)):
-            res = df5.to_sql('break_3_lines', engine_ts, index=False, if_exists='append', chunksize=5000)
-            print("********************===  抓到一个 一阳三线 了!  ===**********************")
-
-time.sleep(60)#规避接口500次/min的限制
+#time.sleep(10)#规避接口500次/min的限制
 
 for array in array7:
     stock_dat = pro.daily(ts_code=array, start_date=begin_date, end_date=last_date)
@@ -976,51 +901,31 @@ for array in array7:
 
         #========================>第三个if：一阳三线的股票 存入数据库（速度太慢了）
 
-        #查询并计算5日、10日、20日、30日均线值
-        sqlfive =  "select avg (tt.close) avg5 ,tt.ts_code,tt.trade_date from (select t.close,t.ts_code ,t.trade_date from trade_details_2022 t where t.ts_code={} and " \
-                   " t.trade_date<={} order by t.trade_date  desc  limit 5)as tt".format( stock_code ,trade_day)
-        df5 = pd.read_sql_query(sqlfive, engine_ts)
-        # print(df5)
-        average5 = pd.DataFrame(df5)
-        avg5= average5.get('avg5')#获取到5日均值
-        # print('5日线值：%s'%avg5)
-        # print(avg5)
-        # print(type(float(avg5)))
-        # print(type(today['open']))
+        #========================>第三个if：一阳三线的股票 存入数据库（速度太慢了）
+        df = ts.pro_bar(ts_code=today['ts_code'], start_date='20220801', end_date=last_date, ma=[5, 10, 20, 30])
+        # print(df)
+        # print(df.ma5)
+        lines_5 = (df.ma5)[0]
+        # print(lines_5)
 
-        sql10 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 10)as tt".format(stock_code ,trade_day)
-        df10 = pd.read_sql_query(sql10, engine_ts)
+        if (today['open'] < (df.ma5)[0] and today['open'] < (df.ma10)[0] and today['open'] < (df.ma20)[0] and (
+                today['close'] > (df.ma5)[0] and today['close'] > (df.ma10)[0] and today['close'] > (df.ma20)[0])):
+            sql_three_lines = "insert into  break_3_lines (ts_code,trade_date,avg5) value (%s,%s,%s)"
+            param = (today.ts_code, date, lines_5)
 
-        # print(df10)
-        average10 = pd.DataFrame(df10)
-        avg10=average10.get('avg (tt.close)')#获取到10日均值
-        # print('10日线值：%s'%avg10)
+            try:
+                # 执行sql语句
+                cursor.execute(sql_three_lines, param)
+                print("Add To Database  Success")
+                # 提交到数据库执行
+                connect.commit()
+            except:
+                # 发生错误时回滚
+                connect.rollback()
 
+            print("********************===  抓到一个 一阳三线 了!====>>> %s ===**********************" % today.ts_code)
 
-        sql20 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 20)as tt".format(stock_code ,trade_day)
-        df20 = pd.read_sql_query(sql20, engine_ts)
-        average20 = pd.DataFrame(df20)
-        avg20=average20.get('avg (tt.close)')#获取到20日均值
-        # print('20日线值：%s'%avg20)
-
-
-        # sql30 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-        #         " t.trade_date<={} order by t.trade_date  desc  limit 30)as tt".format(stock_code ,trade_day)
-        # df30 = pd.read_sql_query(sql30, engine_ts)
-        # average30 = pd.DataFrame(df30)
-        # avg30=average30.get('avg (tt.close)')#获取到30日均值
-        # print('30日线值：%s'%avg30)
-
-
-
-
-        if (today['open']<float(avg5) and today['open']<float(avg10) and today['open']<float(avg20))and(today['close']>float(avg5) and today['close']>float(avg10) and today['close']>float(avg20)):
-            res = df5.to_sql('break_3_lines', engine_ts, index=False, if_exists='append', chunksize=5000)
-            print("********************===  抓到一个 一阳三线 了!  ===**********************")
-
-time.sleep(60)#规避接口500次/min的限制
+#time.sleep(10)#规避接口500次/min的限制
 for array in array8:
     stock_dat = pro.daily(ts_code=array, start_date=begin_date, end_date=last_date)
     for kl_index in np.arange(1, stock_dat.shape[0]):
@@ -1109,51 +1014,31 @@ for array in array8:
 
         #========================>第三个if：一阳三线的股票 存入数据库（速度太慢了）
 
-        #查询并计算5日、10日、20日、30日均线值
-        sqlfive =  "select avg (tt.close) avg5 ,tt.ts_code,tt.trade_date from (select t.close,t.ts_code ,t.trade_date from trade_details_2022 t where t.ts_code={} and " \
-                   " t.trade_date<={} order by t.trade_date  desc  limit 5)as tt".format( stock_code ,trade_day)
-        df5 = pd.read_sql_query(sqlfive, engine_ts)
-        # print(df5)
-        average5 = pd.DataFrame(df5)
-        avg5= average5.get('avg5')#获取到5日均值
-        # print('5日线值：%s'%avg5)
-        # print(avg5)
-        # print(type(float(avg5)))
-        # print(type(today['open']))
+        #========================>第三个if：一阳三线的股票 存入数据库（速度太慢了）
+        df = ts.pro_bar(ts_code=today['ts_code'], start_date='20220801', end_date=last_date, ma=[5, 10, 20, 30])
+        # print(df)
+        # print(df.ma5)
+        lines_5 = (df.ma5)[0]
+        # print(lines_5)
 
-        sql10 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 10)as tt".format(stock_code ,trade_day)
-        df10 = pd.read_sql_query(sql10, engine_ts)
+        if (today['open'] < (df.ma5)[0] and today['open'] < (df.ma10)[0] and today['open'] < (df.ma20)[0] and (
+                today['close'] > (df.ma5)[0] and today['close'] > (df.ma10)[0] and today['close'] > (df.ma20)[0])):
+            sql_three_lines = "insert into  break_3_lines (ts_code,trade_date,avg5) value (%s,%s,%s)"
+            param = (today.ts_code, date, lines_5)
 
-        # print(df10)
-        average10 = pd.DataFrame(df10)
-        avg10=average10.get('avg (tt.close)')#获取到10日均值
-        # print('10日线值：%s'%avg10)
+            try:
+                # 执行sql语句
+                cursor.execute(sql_three_lines, param)
+                print("Add To Database  Success")
+                # 提交到数据库执行
+                connect.commit()
+            except:
+                # 发生错误时回滚
+                connect.rollback()
 
+            print("********************===  抓到一个 一阳三线 了!====>>> %s ===**********************" % today.ts_code)
 
-        sql20 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 20)as tt".format(stock_code ,trade_day)
-        df20 = pd.read_sql_query(sql20, engine_ts)
-        average20 = pd.DataFrame(df20)
-        avg20=average20.get('avg (tt.close)')#获取到20日均值
-        # print('20日线值：%s'%avg20)
-
-
-        # sql30 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-        #         " t.trade_date<={} order by t.trade_date  desc  limit 30)as tt".format(stock_code ,trade_day)
-        # df30 = pd.read_sql_query(sql30, engine_ts)
-        # average30 = pd.DataFrame(df30)
-        # avg30=average30.get('avg (tt.close)')#获取到30日均值
-        # print('30日线值：%s'%avg30)
-
-
-
-
-        if (today['open']<float(avg5) and today['open']<float(avg10) and today['open']<float(avg20))and(today['close']>float(avg5) and today['close']>float(avg10) and today['close']>float(avg20)):
-            res = df5.to_sql('break_3_lines', engine_ts, index=False, if_exists='append', chunksize=5000)
-            print("********************===  抓到一个 一阳三线 了!  ===**********************")
-
-time.sleep(60)#规避接口500次/min的限制
+#time.sleep(10)#规避接口500次/min的限制
 
 for array in array9:
     stock_dat = pro.daily(ts_code=array, start_date=begin_date, end_date=last_date)
@@ -1243,51 +1128,31 @@ for array in array9:
 
         #========================>第三个if：一阳三线的股票 存入数据库（速度太慢了）
 
-        #查询并计算5日、10日、20日、30日均线值
-        sqlfive =  "select avg (tt.close) avg5 ,tt.ts_code,tt.trade_date from (select t.close,t.ts_code ,t.trade_date from trade_details_2022 t where t.ts_code={} and " \
-                   " t.trade_date<={} order by t.trade_date  desc  limit 5)as tt".format( stock_code ,trade_day)
-        df5 = pd.read_sql_query(sqlfive, engine_ts)
-        # print(df5)
-        average5 = pd.DataFrame(df5)
-        avg5= average5.get('avg5')#获取到5日均值
-        # print('5日线值：%s'%avg5)
-        # print(avg5)
-        # print(type(float(avg5)))
-        # print(type(today['open']))
+        #========================>第三个if：一阳三线的股票 存入数据库（速度太慢了）
+        df = ts.pro_bar(ts_code=today['ts_code'], start_date='20220801', end_date=last_date, ma=[5, 10, 20, 30])
+        # print(df)
+        # print(df.ma5)
+        lines_5 = (df.ma5)[0]
+        # print(lines_5)
 
-        sql10 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 10)as tt".format(stock_code ,trade_day)
-        df10 = pd.read_sql_query(sql10, engine_ts)
+        if (today['open'] < (df.ma5)[0] and today['open'] < (df.ma10)[0] and today['open'] < (df.ma20)[0] and (
+                today['close'] > (df.ma5)[0] and today['close'] > (df.ma10)[0] and today['close'] > (df.ma20)[0])):
+            sql_three_lines = "insert into  break_3_lines (ts_code,trade_date,avg5) value (%s,%s,%s)"
+            param = (today.ts_code, date, lines_5)
 
-        # print(df10)
-        average10 = pd.DataFrame(df10)
-        avg10=average10.get('avg (tt.close)')#获取到10日均值
-        # print('10日线值：%s'%avg10)
+            try:
+                # 执行sql语句
+                cursor.execute(sql_three_lines, param)
+                print("Add To Database  Success")
+                # 提交到数据库执行
+                connect.commit()
+            except:
+                # 发生错误时回滚
+                connect.rollback()
 
-
-        sql20 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-                " t.trade_date<={} order by t.trade_date  desc  limit 20)as tt".format(stock_code ,trade_day)
-        df20 = pd.read_sql_query(sql20, engine_ts)
-        average20 = pd.DataFrame(df20)
-        avg20=average20.get('avg (tt.close)')#获取到20日均值
-        # print('20日线值：%s'%avg20)
+            print("********************===  抓到一个 一阳三线 了!====>>> %s ===**********************" % today.ts_code)
 
 
-        # sql30 = "select avg (tt.close) from (select t.close from trade_details_2022 t where t.ts_code={} and " \
-        #         " t.trade_date<={} order by t.trade_date  desc  limit 30)as tt".format(stock_code ,trade_day)
-        # df30 = pd.read_sql_query(sql30, engine_ts)
-        # average30 = pd.DataFrame(df30)
-        # avg30=average30.get('avg (tt.close)')#获取到30日均值
-        # print('30日线值：%s'%avg30)
-
-
-
-
-        if (today['open']<float(avg5) and today['open']<float(avg10) and today['open']<float(avg20))and(today['close']>float(avg5) and today['close']>float(avg10) and today['close']>float(avg20)):
-            res = df5.to_sql('break_3_lines', engine_ts, index=False, if_exists='append', chunksize=5000)
-            print("********************===  抓到一个 一阳三线 了!  ===**********************")
-
-time.sleep(60)#规避接口500次/min的限制
 
 
 

@@ -6,17 +6,13 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import matplotlib.ticker as ticker
-
 import MySQLdb
-
+import datetime
 from sqlalchemy import create_engine
 
 import time
 
-
-
 pro = ts.pro_api('a0045b3469b1b145fb57a7b97467a49fd7deecdd299c21b6d9a5f64a',33)
-
 
 engine_ts = create_engine('mysql://root:root@127.0.0.1:3306/test?charset=utf8&use_unicode=1')
 # df = pro.stock_basic() #股票池基本信息
@@ -26,8 +22,18 @@ engine_ts = create_engine('mysql://root:root@127.0.0.1:3306/test?charset=utf8&us
 today= time.strftime('%Y%m%d',time.localtime(time.time()))#接口所需参数格式
 print(today)
 df=pro.daily(trade_date=today)
-# print(df)
+print(df)
 res = df.to_sql('trade_details_2022', engine_ts, index=False, if_exists='append', chunksize=5000)
+#格式化日期
+# now_time=datetime.datetime.now()
+# print(now_time.strftime("%Y%m%d"))
+# print((now_time+datetime.timedelta(days=-1)).strftime("%Y%m%d")) #获取后一天
+#
+# begin_date=(now_time+datetime.timedelta(days=-1)).strftime("%Y%m%d")#获取后一天
+# last_date=now_time.strftime("%Y%m%d")
+# print(begin_date)
+# print(last_date)
+
 # #查询出均价
 # ts_code='000777'
 # sql5 = "select avg (tt.close) avg5 ,tt.ts_code,tt.trade_date from (select t.close,t.ts_code ,t.trade_date from trade_details_2022 t where t.ts_code={} and " \
@@ -86,13 +92,13 @@ res = df.to_sql('trade_details_2022', engine_ts, index=False, if_exists='append'
 
 
 #获取当年1月1日至今的交易日期
-# trade_cal = pro.trade_cal(is_open='1', start_date='20220101', end_date='20220916')
+# trade_cal = pro.trade_cal(is_open='1', start_date='20220916', end_date='20220923')
 # print(trade_cal)
 #
-# trade_days=trade_cal.cal_date
+# trade_days=trade_cal.cal_date#获取交易日期对象中的日期
 # print(trade_days)
 # list(trade_days)
 # for trade_day in trade_days:
 #     df=pro.daily(trade_date=trade_day)
 #     # print(df)
-#     res = df.to_sql('trade_details_2022', engine_ts, index=False, if_exists='append', chunksize=5000)
+#     res = df.to_sql('trade_details_2022_all', engine_ts, index=False, if_exists='append', chunksize=5000)
