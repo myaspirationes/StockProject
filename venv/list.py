@@ -90,3 +90,21 @@ lis=sorted(dic.items(),key=lambda x:x[0],reverse=False)
 print(lis)
 print(dict(lis))
 
+def twoSum(nums, target):
+    """
+    :type nums: List[int]
+    :type target: int
+    :rtype: List[int]
+    """
+
+    for i in range(len(nums)):
+        for j in range(i,len(nums)):
+            if (nums[i] + nums[j] == 9):
+                print(i, j)
+
+
+if __name__ == '__main__':
+    twoSum( nums = [2, 5,4,7, 11, 15,7],
+        target = 9)
+
+

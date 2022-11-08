@@ -1155,7 +1155,7 @@ for array in array9:
 
 
 
-
+cursor.close()
 
 connect.close()
 # sdf.to_excel("allSkipStock.xlsx")
