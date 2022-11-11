@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import MySQLdb
 from sqlalchemy import create_engine
-import time
+import time,copy
 import datetime
 
 # pro = ts.pro_api('a0045b3469b1b145fb57a7b97467a49fd7deecdd299c21b6d9a5f64a',33)# 备用token ，防止接口调用次数用完
@@ -70,8 +70,8 @@ get_codes = dict(zip(df_basic.ts_code.values, df_basic.industry.values))
 
 arrays = get_codes.keys()
 arrays = list(arrays)
- # arrays=arrays[:2000:-1]# 哈哈 ，一次网络异常终止，造成后面1300个没有处理，如是倒序来取值调接口一次
-# arrays=arrays[2050:]# 哈哈 ，一次网络异常终止，造成后面1900个没有处理，如是倒序来取值调接口一次
+#arrays=arrays[::-1]# 哈哈 ，一次网络异常终止，造成后面1300个没有处理，如是倒序来取值调接口一次
+#arrays=arrays[250:]# 哈哈 ，一次网络异常终止，造成后面1300个没有处理，如是倒序来取值调接口一次
 # print(len(arrays))  #长度是 ：4296
 
 # time.sleep(1)
@@ -103,6 +103,14 @@ for array in arrays:
         stock_code = today['ts_code'][0:9]
         # print(stock_code)
 
+        # last_2w = stock_code[-2:]
+        # # print(last_2w)
+        # pre_6w = stock_code[0:6]
+        # # print(pre_6w)
+        # stock_code = last_2w + pre_6w
+
+
+
         trade_day = today['trade_date']
         # print(trade_day)
         print(stock_code)
@@ -117,11 +125,7 @@ for array in arrays:
             # print(today.trade_date)
             # print(Multiples)
             # print("stock code: {}  , trade date is: {}, multiples is {}" .format(stock_code,today.trade_date,Multiples))
-            last_2w = stock_code[-2:]
-            # print(last_2w)
-            pre_6w = stock_code[0:6]
-            # print(pre_6w)
-            stock_code = last_2w + pre_6w
+
             # 使用两种方法存入数据库
             # 1.符合条件的存入详细信息表中，、
             todayfor = stock_dat[stock_dat.trade_date == today.trade_date]
@@ -134,8 +138,15 @@ for array in arrays:
                                       chunksize=5000)
 
             # 2.存入3倍表中
+            last_2w = stock_code[-2:]
+            # print(last_2w)
+            pre_6w = stock_code[0:6]
+            # print(pre_6w)
+            tri_stock_code = last_2w + pre_6w #格式sh600600 或者sz300300
+            print(tri_stock_code)
+
             sql_three_times = "insert ignore into  three_times_vol (ts_code,times,date) value (%s,%s,%s)"
-            param = (stock_code, Multiples, date)
+            param = (tri_stock_code, Multiples, date)
 
             try:
                 cursor.execute(sql_three_times, param)
@@ -148,7 +159,16 @@ for array in arrays:
         skip_stock_code = []
         jump_threshold = 0.01  # 超过1分钱
         if (today['pct_chg'] > 0) and ((today.low - yesterday.high) > jump_threshold):
-            skip_stock_code.append(stock_code)
+            deep_stock_code=copy.deepcopy(stock_code)
+            last_2w = deep_stock_code[-2:]
+            # print(last_2w)
+            pre_6w = deep_stock_code[0:6]
+            # print(pre_6w)
+            stock_code_skip = last_2w + pre_6w  # 格式sh600600 或者sz300300
+
+
+
+            skip_stock_code.append(stock_code_skip)
             print('$$$$$$$$$$=====  跳空  ==========>')
             print(skip_stock_code)
             # name = today.name
@@ -174,8 +194,17 @@ for array in arrays:
 
         if (today['open'] < (df.ma5)[0] and today['open'] < (df.ma10)[0] and today['open'] < (df.ma20)[0] and (
                 today['close'] > (df.ma5)[0] and today['close'] > (df.ma10)[0] and today['close'] > (df.ma20)[0])):
+
+            deep_stock_code2 = copy.deepcopy(stock_code)
+            last_2w = deep_stock_code2[-2:]
+            # print(last_2w)
+            pre_6w = deep_stock_code2[0:6]
+            # print(pre_6w)
+            stock_code_3lines = last_2w + pre_6w  # 格式sh600600 或者sz300300
+            print(stock_code_3lines)
+
             sql_three_lines = "insert ignore into  break_3_lines (ts_code,trade_date,avg5) value (%s,%s,%s)"
-            param = (stock_code, date, (df.ma5)[0])
+            param = (stock_code_3lines, date, (df.ma5)[0])
 
             try:
                 cursor.execute(sql_three_lines, param)                 # 执行sql语句
@@ -188,13 +217,13 @@ for array in arrays:
 
 
 
-
-
-sql_dual_triple="insert ignore into test.dual_three (dual_three.ts_code,`date`,times,name) select break_3_lines.ts_code, three_times_vol.`date`, three_times_vol.`times`, stock_basic.name from break_3_lines, stock_basic, three_times_vol where break_3_lines.ts_code = stock_basic.ts_code and break_3_lines.ts_code = three_times_vol.ts_code and three_times_vol.`date`=break_3_lines.trade_date"
-sql_skip_triple="insert ignore into test.skip_triple (skip_triple.ts_code,`date`,name) select skip_stock.ts_code, three_times_vol.`date`, stock_basic.name from skip_stock, stock_basic, three_times_vol where skip_stock.ts_code = stock_basic.ts_code and skip_stock.ts_code = three_times_vol.ts_code and skip_stock.`date`=three_times_vol.`date`"
-sql_skip_times_lines="insert ignore into test.skip_times_lines (skip_times_lines.`date`,name,ts_code) select dual_three.`date` , dual_three.name , skip_triple.ts_code from dual_three , skip_triple where dual_three.`date` = skip_triple.`date` and dual_three.ts_code = skip_triple.ts_code"
-
-
+#
+#
+# sql_dual_triple="insert ignore into test.dual_three (dual_three.ts_code,`date`,times,name) select break_3_lines.ts_code, three_times_vol.`date`, three_times_vol.`times`, stock_basic.name from break_3_lines, stock_basic, three_times_vol where break_3_lines.ts_code = stock_basic.ts_code and break_3_lines.ts_code = three_times_vol.ts_code and three_times_vol.`date`=break_3_lines.trade_date"
+# sql_skip_triple="insert ignore into test.skip_triple (skip_triple.ts_code,`date`,name) select skip_stock.ts_code, three_times_vol.`date`, stock_basic.name from skip_stock, stock_basic, three_times_vol where skip_stock.ts_code = stock_basic.ts_code and skip_stock.ts_code = three_times_vol.ts_code and skip_stock.`date`=three_times_vol.`date`"
+# sql_skip_times_lines="insert ignore into test.skip_times_lines (skip_times_lines.`date`,name,ts_code) select dual_three.`date` , dual_three.name , skip_triple.ts_code from dual_three , skip_triple where dual_three.`date` = skip_triple.`date` and dual_three.ts_code = skip_triple.ts_code"
+#
+#
 
 
 

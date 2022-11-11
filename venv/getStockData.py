@@ -1,12 +1,11 @@
 import requests
-import tushare
+# import tushare
 import  time
 import openpyxl
 import MySQLdb
 from sqlalchemy import create_engine
 
-
-print((time.time()*1000))
+# 获取时间戳 timestamp
 t=int(time.time()*1000)
 tss=str(t)
 #https://xueqiu.com/service/screener/screen?category=CN&exchange=sh_sz&areacode=&indcode=&order_by=symbol&order=desc&page=1&size=30&only_count=0&current=&pct=3_15&chgpct=3_10&pct_current_year=-67.34_577.96&mc=103309550_2317421139462&fmc=25076621_2317421139462&_=1662726491205

@@ -51,22 +51,51 @@ try:
     # 执行sql语句
     # cursor.execute(sql, skip_stock_code)
     cursor_django.execute(sql_django_dual_three)
-    print("Add To Database  Success 1")
+    print("Add dual_three To web_django Database  Success ")
 
     time.sleep(5)
 
     cursor_django.execute(sql_django_skip_triple)
-    print("Add To Database  Success 2")
+    print("Add skip_triple To web_django Database  Success")
 
     time.sleep(5)
     cursor_django.execute(sql_django_skip_times_lines)
 
-    print("Add To Database  Success 3")
+    print("Add skip_times_lines To web_django Database  Success")
     # 提交到数据库执行
     connect.commit()
 except:
     # 发生错误时回滚
     connect.rollback()
+
+SQL_test_to_django_break3lines="insert ignore into web_django.break_three_lines (select * from test.break_3_lines)"
+SQL_test_to_django_three_times_vol="insert ignore into web_django.three_times_vol (select * from test.three_times_vol)"
+SQL_test_to_django_skip_stock="insert ignore into web_django.skip_stock (select * from test.skip_stock)"
+
+try:
+    # 执行sql语句
+    # cursor.execute(sql, skip_stock_code)
+    cursor_django.execute(SQL_test_to_django_break3lines)
+    print("Add break3lines form test To web_django  Success ")
+
+    time.sleep(5)
+
+    cursor_django.execute(SQL_test_to_django_three_times_vol)
+    print("Add three_times_vol form test To web_django  Success")
+
+    time.sleep(5)
+    cursor_django.execute(SQL_test_to_django_skip_stock)
+
+    print("Add skip_stock form test To web_django  Success")
+    # 提交到数据库执行
+    connect.commit()
+except:
+    # 发生错误时回滚
+    connect.rollback()
+
+
+
+
 
 cursor_django.close()
 connect_django.close()
