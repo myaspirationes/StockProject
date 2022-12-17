@@ -12,18 +12,22 @@ from sqlalchemy import create_engine
 
 import time
 
+
+# 查询出所有的股票信息插入表中
+
 pro = ts.pro_api('a0045b3469b1b145fb57a7b97467a49fd7deecdd299c21b6d9a5f64a',33)
 
 engine_ts = create_engine('mysql://root:root@127.0.0.1:3306/test?charset=utf8&use_unicode=1')
-# df = pro.stock_basic() #股票池基本信息
+df = pro.stock_basic() #股票池基本信息
 # res = df.to_sql('stock_basic', engine_ts, index=False, if_exists='append', chunksize=5000)
-
-#每日插入交易数据
-today= time.strftime('%Y%m%d',time.localtime(time.time()))#接口所需参数格式
-print(today)
-df=pro.daily(trade_date=today)
-print(df)
-res = df.to_sql('trade_details_2022', engine_ts, index=False, if_exists='append', chunksize=5000)
+res = df.to_sql('stock_basic', engine_ts, index=False, if_exists='replace')
+#
+# #每日插入交易数据
+# today= time.strftime('%Y%m%d',time.localtime(time.time()))#接口所需参数格式
+# print(today)
+# df=pro.daily(trade_date=today)
+# print(df)
+# res = df.to_sql('trade_details_2022', engine_ts, index=False, if_exists='append', chunksize=5000)
 #格式化日期
 # now_time=datetime.datetime.now()
 # print(now_time.strftime("%Y%m%d"))

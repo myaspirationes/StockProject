@@ -18,12 +18,12 @@ try:
     cursor.execute(sql_dual_three)
     print("Add To Database  Success 1")
 
-    time.sleep(5)
+    time.sleep(2)
 
     cursor.execute(sql_skip_triple)
     print("Add To Database  Success 2")
 
-    time.sleep(5)
+    time.sleep(2)
     cursor.execute(sql_skip_times_lines)
 
     print("Add To Database  Success 3")
@@ -45,20 +45,24 @@ sql_django_dual_three="insert ignore into web_django.dual_three select * from te
 sql_django_skip_triple="insert ignore into web_django.skip_triple select * from test.skip_triple"
 sql_django_skip_times_lines="insert ignore into web_django.skip_times_lines select * from test.skip_times_lines"
 
-
+sql_hot_stocks="INSERT ignore INTO web_django.hot_stocks (ts_code,name, date_exchange, price, follow7d, follow7dpct, `date`) select * from test.hot_stocks"
 
 try:
     # 执行sql语句
-    # cursor.execute(sql, skip_stock_code)
+    cursor_django.execute(sql_hot_stocks)
+    print("Add hotstocks To web_django Database  Success ")
+
+    time.sleep(1)
+
     cursor_django.execute(sql_django_dual_three)
     print("Add dual_three To web_django Database  Success ")
+    time.sleep(1)
 
-    time.sleep(5)
 
     cursor_django.execute(sql_django_skip_triple)
     print("Add skip_triple To web_django Database  Success")
 
-    time.sleep(5)
+    time.sleep(1)
     cursor_django.execute(sql_django_skip_times_lines)
 
     print("Add skip_times_lines To web_django Database  Success")
@@ -78,12 +82,12 @@ try:
     cursor_django.execute(SQL_test_to_django_break3lines)
     print("Add break3lines form test To web_django  Success ")
 
-    time.sleep(5)
+    time.sleep(1)
 
     cursor_django.execute(SQL_test_to_django_three_times_vol)
     print("Add three_times_vol form test To web_django  Success")
 
-    time.sleep(5)
+    time.sleep(1)
     cursor_django.execute(SQL_test_to_django_skip_stock)
 
     print("Add skip_stock form test To web_django  Success")
@@ -93,8 +97,24 @@ except:
     # 发生错误时回滚
     connect.rollback()
 
+sql_change_3_days= "insert  ignore into web_django.change_three_days (today_price,ts_code,name,change_3_days,date)  select  today_price,ts_code,name,change_3_days,date from test.change_three_days"
+sql_change_5_days= "insert  ignore into web_django.change_five_days (today_price,ts_code,name,change_5_days,date)  select * from test.change_five_days"
+sql_change_10_days= "insert  ignore into web_django.change_ten_days (today_price,ts_code,name,change_10_days,date)  select * from test.change_ten_days"
 
+try:
+    cursor_django.execute(sql_change_3_days)
+    time.sleep(1)
 
+    print("change 3 days trance success")
+    cursor_django.execute(sql_change_5_days)
+    time.sleep(1)
+    print("change 5 days trance success")
+
+    cursor_django.execute(sql_change_10_days)
+    print("change 10 days trance success")
+    connect.commit()
+except:
+    connect.rollback()
 
 
 cursor_django.close()
