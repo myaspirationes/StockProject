@@ -17,8 +17,8 @@ def InsertData(TableName, dic):
             COLstr = COLstr + ' ' + key + ColumnStyle + ','
             ROWstr = (ROWstr + '"%s"' + ',') % (dic[key])
 
-            print(COLstr)
-            print(COLstr[:-1])
+        print(COLstr)
+        print(ROWstr[:-1])
 
         # 判断表是否存在，存在执行try，不存在执行except新建表，再insert
         try:

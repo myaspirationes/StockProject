@@ -1,4 +1,5 @@
 import numpy as np
+import datetime
 
 list_one=[1,2,3,4,6,8,9,12]
 list_two=[1,2,3,4,6,8,9,9,9,12]
@@ -104,6 +105,9 @@ def twoSum(nums, target):
 
 
 if __name__ == '__main__':
+    
+
+
     twoSum( nums = [2, 5,4,7, 11, 15,7],
         target = 9)
 
