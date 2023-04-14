@@ -240,8 +240,8 @@ def get_volum_data(url):
 
 
 if __name__ == '__main__':
-    # url1='http://data.10jqka.com.cn/rank/lxsz/field/lxts/order/asc/page/1/'
-    # url2='http://data.10jqka.com.cn/rank/lxsz/field/lxts/order/asc/page/2/'
+    url1='http://data.10jqka.com.cn/rank/lxsz/field/lxts/order/asc/page/1/'
+    url2='http://data.10jqka.com.cn/rank/lxsz/field/lxts/order/asc/page/2/'
     # url3='http://data.10jqka.com.cn/rank/lxsz/field/lxts/order/asc/page/3/'
     # url4='http://data.10jqka.com.cn/rank/lxsz/field/lxts/order/asc/page/4/'  ,'http://data.10jqka.com.cn/rank/lxsz/field/lxts/order/asc/page/3/'
 
@@ -257,7 +257,9 @@ if __name__ == '__main__':
     # get_price_data(url3)
     # get_price_data(url4)
     # get_volum_data("http://data.10jqka.com.cn/rank/cxfl/field/count/order/desc/page/1/")
+    # get_volum_data("http://data.10jqka.com.cn/rank/cxfl/field/count/order/desc/page/2/")
     # get_volum_data("http://data.10jqka.com.cn/rank/cxfl/field/count/order/desc/page/3/")
+    # get_volum_data("http://data.10jqka.com.cn/rank/cxfl/field/count/order/desc/page/4/")
     for link in price_url:
         get_price_data(link)
     for volum in volum_url:

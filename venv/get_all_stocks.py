@@ -20,7 +20,29 @@ pro = ts.pro_api('a0045b3469b1b145fb57a7b97467a49fd7deecdd299c21b6d9a5f64a',33)
 engine_ts = create_engine('mysql://root:root@127.0.0.1:3306/test?charset=utf8&use_unicode=1')
 df = pro.stock_basic() #股票池基本信息
 # res = df.to_sql('stock_basic', engine_ts, index=False, if_exists='append', chunksize=5000)
-res = df.to_sql('stock_basic_1', engine_ts, index=False, if_exists='replace')
+res = df.to_sql('stock_basic', engine_ts, index=False, if_exists='replace')
+
+time.sleep(10)
+
+update_tscode="UPDATE stock_basic SET ts_code = CONCAT( SUBSTRING_INDEX(ts_code, '.', -1),SUBSTRING_INDEX(ts_code, '.', 1))"
+
+connect = MySQLdb.connect("localhost", "root", "root", "test", charset='utf8')
+cursor = connect.cursor()
+
+try:
+
+    cursor.execute(update_tscode)
+    connect.commit()
+
+
+
+except mysql.connector.Error as error:
+    print("error:{}".format(error))
+
+cursor.close()
+connect.close()
+
+
 #
 # #每日插入交易数据
 # today= time.strftime('%Y%m%d',time.localtime(time.time()))#接口所需参数格式

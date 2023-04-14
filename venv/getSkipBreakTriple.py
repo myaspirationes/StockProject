@@ -17,8 +17,8 @@ now_time = datetime.datetime.now()
 last_date = now_time.strftime("%Y%m%d")
 begin_date = (now_time + datetime.timedelta(days=-10)).strftime("%Y%m%d")  # 获取十天前日期，春节、国庆长假，十天之内必有交易日
 
-pro = ts.pro_api('a0045b3469b1b145fb57a7b97467a49fd7deecdd299c21b6d9a5f64a',33)# 备用token ，防止接口调用次数用完
-# pro = ts.pro_api('4ddd47790cce532bde92ebdd220de5116d99b7155386f37dbabb7228', 50)
+# pro = ts.pro_api('a0045b3469b1b145fb57a7b97467a49fd7deecdd299c21b6d9a5f64a',33)# 备用token ，防止接口调用次数用完
+pro = ts.pro_api('4ddd47790cce532bde92ebdd220de5116d99b7155386f37dbabb7228', 50)
 # 调用接口 获取交易日历
 trade_cal = pro.trade_cal(exchange='', start_date=begin_date, end_date=last_date)  # 获取最近十天中的交易日
 # print(trade_cal)
@@ -40,8 +40,8 @@ connect = MySQLdb.connect("localhost", "root", "root", "test", charset='utf8')
 cursor = connect.cursor()
 # 链接数据库方法二：
 engine_ts = create_engine('mysql://root:root@127.0.0.1:3306/test?charset=utf8&use_unicode=1')
-ts.set_token('a0045b3469b1b145fb57a7b97467a49fd7deecdd299c21b6d9a5f64a')
-# ts.set_token('4ddd47790cce532bde92ebdd220de5116d99b7155386f37dbabb7228')
+# ts.set_token('a0045b3469b1b145fb57a7b97467a49fd7deecdd299c21b6d9a5f64a')
+ts.set_token('4ddd47790cce532bde92ebdd220de5116d99b7155386f37dbabb7228')
 
 # df = ak.stock_zh_a_daily(symbol="sz002714", start_date="20201103", end_date="20210118",adjust="qfq")
 # 从接口拿数据
@@ -73,7 +73,7 @@ get_codes = dict(zip(df_basic.ts_code.values, df_basic.industry.values))
 arrays = get_codes.keys()
 arrays = list(arrays)
 # arrays=arrays[-100:-500:-1]# 一次网络异常终止，造成后面34561300个没有处理，如是倒序来取值调接口一次
-# arrays=arrays[967:]# 一次网络异常终止，造成后面1300个没有处理，如是倒序来取值调接口一次
+# arrays=arrays[:508]# 一次网络异常终止，造成后面1300个没有处理，如是倒序来取值调接口一次
 print(len(arrays))  #长度是 ：4296
 
 # time.sleep(1)
@@ -94,8 +94,9 @@ for array in arrays:
     if (i % 500 == 0):
         number = i // 500
         print(
-            '*********************************************已调用接口第 %s 个500次了，让tushare的接口踹口气**********************************************' % number)
-        time.sleep(3)
+            '****************************************************************************已调用接口第 %s '
+            '个500次了，让tushare的接口踹口气*************************************************************' % number)
+        time.sleep(1)
         print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
     # print(stock_dat.shape[0])
     for kl_index in np.arange(1, stock_dat.shape[0]):
