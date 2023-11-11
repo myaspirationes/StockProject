@@ -9,7 +9,7 @@
 import time
 
 import MySQLdb
-import requests
+import s
 import  json
 # from spider import InsertData
 headers={'Content-Type': 'application/json',

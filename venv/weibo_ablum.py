@@ -9,13 +9,16 @@
 import requests
 import time,os
 
+
+
+
 header = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36",
     "Referer": f"https://weibo.com",
-    'cookie':'SINAGLOBAL=192321401298.90274.1628520195961; UOR=,,www.baidu.com; XSRF-TOKEN=Lf8iJ3wAYtiyyo4PmDieFIea; ALF=1682156920; SSOLoginState=1679564921; WBPSESS=Z8Jz2InUi7Z7ZSkpzBTYzsb0rXLBjV3s-vDKI2tOTan_XXz9Xmn2IHbLZhBalRNmyzmwMUAAcYcpUaTj4DZP6DueTpYPGbKfeL8nBnmF6QEjutHuny14oLwT9jonRCFTCALNfta0v37zUQyUuXH5Aw==; SCF=AinE7GEoQGToKqqy8G7vVvkqyI9Qperwj3hAfoZstgeGUYZhX4XMWAYTqCxz3EUSO2F8_OHoYkxhwp_hYJ3_UFE.; SUB=_2A25JGFApDeRhGeRK7VYZ9S3LyDiIHXVqbMbhrDV8PUNbmtANLUHDkW9NU33Qk38y1qEw26vbfWUfc3hjBMH0qlAK; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9W5zhH1GAhZZ4Pjq1J6J.CIW5JpX5KMhUgL.FozXSoBRSKeNe0B2dJLoIEXLxKML1heL1-qLxKqLBo5LBoBLxK.L1KMLBoBLxK-L12-LB.zLxKBLB.2L1hqt; _s_tentry=weibo.com; Apache=3602548115498.687.1679564936517; ULV=1679564936522:91:16:4:3602548115498.687.1679564936517:1679447375335'
+    'cookie':'SINAGLOBAL=192321401298.90274.1628520195961; UOR=,,www.baidu.com; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9W5zhH1GAhZZ4Pjq1J6J.CIW5JpX5KMhUgL.FozXSoBRSKeNe0B2dJLoIEXLxKML1heL1-qLxKqLBo5LBoBLxK.L1KMLBoBLxK-L12-LB.zLxKBLB.2L1hqt; XSRF-TOKEN=4K3c_SJQT2nlhl6iAh9jQLix; ALF=1698223929; SSOLoginState=1695631929; SCF=Av4F9lUsw2cJEfjqiusK4yQpnPW7GP3KrdoyuX5TqGNI5VIkAqsSN949BV-thNwlVgjX3Vh2lR_IRfbV8TDz0lA.; SUB=_2A25IFTpqDeRhGeRK7VYZ9S3LyDiIHXVrYyyirDV8PUNbmtANLVjSkW9NU33QkwXa63DHCH2DIUIORwGZ31h9TIyG; _s_tentry=weibo.com; Apache=1210166956977.9138.1695631942130; ULV=1695631942257:177:11:2:1210166956977.9138.1695631942130:1695531220197; WBPSESS=Z8Jz2InUi7Z7ZSkpzBTYzsb0rXLBjV3s-vDKI2tOTan_XXz9Xmn2IHbLZhBalRNmyzmwMUAAcYcpUaTj4DZP6JSc3v87YRwTZM6KSMXI-p9JS5UE4O4CC8jVn57wFbBn9x9UNAQtSqGXooAa7sp6sA=='
 }
 
-uid="7455837899"
+uid="5307758821"
 
 
 # 92eaaee6ly1gtfa3texbbj22083kghdw
@@ -62,8 +65,9 @@ def get_weibo_picture(uid):
 
             #防止网络中断后重头下载,
             # if foronce==1:
-            #     url2="https://weibo.com/ajax/profile/getImageWall?uid=5685894782&sinceid=4857497650594237_-1_20230119_-1"
+            #     url2='https://weibo.com/ajax/profile/getImageWall?uid=5307758821&sinceid=4924560700211850_-1_20230718_-1'
             # foronce=2
+
             request1 = requests.get(url=url2, headers=header)
             html1 = request1.json()
             next_page1 = html1['data']['since_id']

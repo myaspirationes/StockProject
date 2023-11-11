@@ -1,10 +1,9 @@
-from cython import Py_ssize_t
-
 from cpython.dict cimport (
     PyDict_Contains,
     PyDict_GetItem,
     PyDict_SetItem,
 )
+from cython cimport Py_ssize_t
 
 
 cdef class CachedProperty:
@@ -15,7 +14,7 @@ cdef class CachedProperty:
     def __init__(self, fget):
         self.fget = fget
         self.name = fget.__name__
-        self.__doc__ = getattr(fget, '__doc__', None)
+        self.__doc__ = getattr(fget, "__doc__", None)
 
     def __get__(self, obj, typ):
         if obj is None:
@@ -23,7 +22,7 @@ cdef class CachedProperty:
             return self
 
         # Get the cache or set a default one if needed
-        cache = getattr(obj, '_cache', None)
+        cache = getattr(obj, "_cache", None)
         if cache is None:
             try:
                 cache = obj._cache = {}

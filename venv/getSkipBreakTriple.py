@@ -16,9 +16,12 @@ print("今天的日期：{}. 开始时间：{}".format(date, now))
 now_time = datetime.datetime.now()
 last_date = now_time.strftime("%Y%m%d")
 begin_date = (now_time + datetime.timedelta(days=-10)).strftime("%Y%m%d")  # 获取十天前日期，春节、国庆长假，十天之内必有交易日
+begin_date_lines = (now_time + datetime.timedelta(days=-35)).strftime("%Y%m%d")  # 获取十天前日期，春节、国庆长假，十天之内必有交易日
 
 # pro = ts.pro_api('a0045b3469b1b145fb57a7b97467a49fd7deecdd299c21b6d9a5f64a',33)# 备用token ，防止接口调用次数用完
 pro = ts.pro_api('4ddd47790cce532bde92ebdd220de5116d99b7155386f37dbabb7228', 50)
+
+
 # 调用接口 获取交易日历
 trade_cal = pro.trade_cal(exchange='', start_date=begin_date, end_date=last_date)  # 获取最近十天中的交易日
 # print(trade_cal)
@@ -40,20 +43,25 @@ connect = MySQLdb.connect("localhost", "root", "root", "test", charset='utf8')
 cursor = connect.cursor()
 # 链接数据库方法二：
 engine_ts = create_engine('mysql://root:root@127.0.0.1:3306/test?charset=utf8&use_unicode=1')
-# ts.set_token('a0045b3469b1b145fb57a7b97467a49fd7deecdd299c21b6d9a5f64a')
-ts.set_token('4ddd47790cce532bde92ebdd220de5116d99b7155386f37dbabb7228')
+ts.set_token('a0045b3469b1b145fb57a7b97467a49fd7deecdd299c21b6d9a5f64a')
+# ts.set_token('4ddd47790cce532bde92ebdd220de5116d99b7155386f37dbabb7228')
 
 # df = ak.stock_zh_a_daily(symbol="sz002714", start_date="20201103", end_date="20210118",adjust="qfq")
 # 从接口拿数据
 # pro = ts.pro_api('a0045b3469b1b145fb57a7b97467a49fd7deecdd299c21b6d9a5f64a', 33)
-df_basic = pro.stock_basic(exchange='', list_status='L')
+# df_basic = pro.stock_basic(exchange='', list_status='L')
 
-# print(type(df_basic))
-# 筛选数据：剔除*st股，科创板，
+data = pro.query('stock_basic', exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
+
+print(data)
+
+# print(df_basic)
+# 筛选数据：剔除*st股，科创板，新三板
 df_basic = df_basic[df_basic['name'].apply(lambda x: x.find('*ST') < 0)]
 df_basic = df_basic[df_basic['ts_code'].apply(lambda x: x.find('.BJ') < 0)]
-df_basic = df_basic[df_basic['market'].apply(lambda x: x.find('科创板') < 0)]
-# print(df_basic)
+# df_basic = df_basic[df_basic['market'].apply(lambda x: x.find('CDR') < 0)]
+df_basic = df_basic[df_basic['ts_code'].apply(lambda x: x.find('68') < 0)]
+# print(len(df_basic))
 
 
 # print(df_basic.industry)
@@ -73,7 +81,7 @@ get_codes = dict(zip(df_basic.ts_code.values, df_basic.industry.values))
 arrays = get_codes.keys()
 arrays = list(arrays)
 # arrays=arrays[-100:-500:-1]# 一次网络异常终止，造成后面34561300个没有处理，如是倒序来取值调接口一次
-# arrays=arrays[:508]# 一次网络异常终止，造成后面1300个没有处理，如是倒序来取值调接口一次
+# arrays=arrays[3433:]# 一次网络异常终止，造成后面1300个没有处理，如是倒序来取值调接口一次
 print(len(arrays))  #长度是 ：4296
 
 # time.sleep(1)
@@ -121,85 +129,91 @@ for array in arrays:
         # # print(pre_6w)
         # stock_code = last_2w + pre_6w
 
-        trade_day = today['trade_date']
+        # trade_day = today['trade_date']
         # print(trade_day)
         # print(stock_code)
         # print(yesterday)
         # 思考：成交量是昨日3-5倍以上
-        Multiples = round(today.vol / yesterday.vol, 2)  # 交易量倍数保留2位小数
+        # Multiples = round(today.vol / yesterday.vol, 2)  # 交易量倍数保留2位小数
         # print(times)
-        # =======================>第一个if：筛选成交量3倍的股票
-        if (today['pct_chg'] > 0) and (today['close'] > today['open']) and (Multiples >= 2.5):
-            print('$$$$$$$$$$==  3倍  =============>')
-            # print(today.ts_code)
-            # print(today.trade_date)
-            # print(Multiples)
-            # print("stock code: {}  , trade date is: {}, multiples is {}" .format(stock_code,today.trade_date,Multiples))
 
-            # 使用两种方法存入数据库
-            # 1.符合条件的存入详细信息表中，、
-            # todayfor = stock_dat[stock_dat.trade_date == today.trade_date]
-            # yesterdayfor = stock_dat[stock_dat.trade_date == yesterday.trade_date]
-            # print("yesterdayfor")
-            # print(todayfor)
-            # print(type(todayfor))
-            #
-            # res = todayfor.to_sql('three_times_vol_detail', engine_ts, index=False, if_exists='append', chunksize=5000)
-            # res = yesterdayfor.to_sql('three_times_vol_detail', engine_ts, index=False, if_exists='append',chunksize=5000)
-
-            # 2.存入3倍表中
-            last_2w = stock_code[-2:]
-            # print(last_2w)
-            pre_6w = stock_code[0:6]
-            # print(pre_6w)
-            tri_stock_code = last_2w + pre_6w  # 格式SH600600 或者SZ300300
-            print(tri_stock_code)
-
-            sql_three_times = "insert ignore into  three_times_vol (ts_code,times,date) value (%s,%s,%s)"
-            param = (tri_stock_code, Multiples, date)
-
-            try:
-                cursor.execute(sql_three_times, param)
-                print("Three Times  Stock Add To Database  Success")
-                connect.commit()
-            except:
-                connect.rollback()
         #
-        # =======================>第二个if：筛选跳空的stocks
-        skip_stock_code = []
-        jump_threshold = 0.01  # 超过1分钱
-        if (today['pct_chg'] > 0) and ((today.low - yesterday.high) > jump_threshold):
-            deep_stock_code = copy.deepcopy(stock_code)
-            last_2w = deep_stock_code[-2:]
-            # print(last_2w)
-            pre_6w = deep_stock_code[0:6]
-            # print(pre_6w)
-            stock_code_skip = last_2w + pre_6w  # 格式sh600600 或者sz300300
+        # # =======================>第一个if：筛选成交量3倍的股票
+        # if (today['pct_chg'] > 0) and (today['close'] > today['open']) and (Multiples >= 2.5):
+        #     print('$$$$$$$$$$==  3倍  =============>')
+        #     # print(today.ts_code)
+        #     # print(today.trade_date)
+        #     # print(Multiples)
+        #     # print("stock code: {}  , trade date is: {}, multiples is {}" .format(stock_code,today.trade_date,Multiples))
+        #
+        #     # 使用两种方法存入数据库
+        #     # 1.符合条件的存入详细信息表中，、
+        #     # todayfor = stock_dat[stock_dat.trade_date == today.trade_date]
+        #     # yesterdayfor = stock_dat[stock_dat.trade_date == yesterday.trade_date]
+        #     # print("yesterdayfor")
+        #     # print(todayfor)
+        #     # print(type(todayfor))
+        #     #
+        #     # res = todayfor.to_sql('three_times_vol_detail', engine_ts, index=False, if_exists='append', chunksize=5000)
+        #     # res = yesterdayfor.to_sql('three_times_vol_detail', engine_ts, index=False, if_exists='append',chunksize=5000)
+        #
+        #     # 2.存入3倍表中
+        #     last_2w = stock_code[-2:]
+        #     # print(last_2w)
+        #     pre_6w = stock_code[0:6]
+        #     # print(pre_6w)
+        #     tri_stock_code = last_2w + pre_6w  # 格式SH600600 或者SZ300300
+        #     print(tri_stock_code)
+        #
+        #     sql_three_times = "insert ignore into  three_times_vol (ts_code,times,date) value (%s,%s,%s)"
+        #     param = (tri_stock_code, Multiples, date)
+        #
+        #     try:
+        #         cursor.execute(sql_three_times, param)
+        #         print("Three Times  Stock Add To Database  Success")
+        #         connect.commit()
+        #     except:
+        #         connect.rollback()
+        # #
+        # # =======================>第二个if：筛选跳空的stocks
+        # skip_stock_code = []
+        # jump_threshold = 0.01  # 超过1分钱
+        # if (today['pct_chg'] > 0) and ((today.low - yesterday.high) > jump_threshold):
+        #     deep_stock_code = copy.deepcopy(stock_code)
+        #     last_2w = deep_stock_code[-2:]
+        #     # print(last_2w)
+        #     pre_6w = deep_stock_code[0:6]
+        #     # print(pre_6w)
+        #     stock_code_skip = last_2w + pre_6w  # 格式sh600600 或者sz300300
+        #
+        #     skip_stock_code.append(stock_code_skip)
+        #     print('$$$$$$$$$$=====  跳空  ==========>')
+        #     print(skip_stock_code)
+        #     # name = today.name
+        #
+        #     # sql = "INSERT INTO skip_stock (ts_code) values(%s)"
+        #     # sql2 = "INSERT INTO skip_stock values(%s,%s)"
+        #     sql2 = "insert ignore into skip_stock (ts_code, date,today_low,pre_high,pct_chg) VALUES (%s,%s, %s, %s, %s)"
+        #     val = (skip_stock_code, date, today.low, yesterday.high, today.pct_chg)
+        #
+        #     try:
+        #         cursor.execute(sql2, val)
+        #         print("add success")
+        #         connect.commit()  # 提交到数据库执行
+        #     except:
+        #         connect.rollback()  # 发生错误时回滚
 
-            skip_stock_code.append(stock_code_skip)
-            print('$$$$$$$$$$=====  跳空  ==========>')
-            print(skip_stock_code)
-            # name = today.name
 
-            # sql = "INSERT INTO skip_stock (ts_code) values(%s)"
-            # sql2 = "INSERT INTO skip_stock values(%s,%s)"
-            sql2 = "insert ignore into skip_stock (ts_code, date,today_low,pre_high,pct_chg) VALUES (%s,%s, %s, %s, %s)"
-            val = (skip_stock_code, date, today.low, yesterday.high, today.pct_chg)
-
-            try:
-                cursor.execute(sql2, val)
-                print("add success")
-                connect.commit()  # 提交到数据库执行
-            except:
-                connect.rollback()  # 发生错误时回滚
 
         # ========================>第三个if：一阳三线的股票 存入数据库（sql计算5,10,20日均线速度太慢了）
-
-        df = ts.pro_bar(ts_code=today['ts_code'], start_date='20221215', end_date=last_date, ma=[5, 10, 20, 30])
+        df = ts.pro_bar(ts_code=today['ts_code'], start_date=begin_date_lines, end_date=last_date, ma=[5, 10, 20])
         # print(df.ma5)          #所有的五日线值
+        # print(df.ma10)          #所有的五日线值
+        # print(df.ma20)          #所有的五日线值
+        # print("uiui")
         # lines_5 = (df.ma5)[0]   #五日线值
-
-        if (today['open'] < (df.ma5)[0] and today['open'] < (df.ma10)[0] and today['open'] < (df.ma20)[0] and (
+        start = time.perf_counter()
+        if ((today['open'] < (df.ma5)[0] and today['open'] < (df.ma10)[0] and today['open'] < (df.ma20)[0] )and (
                 today['close'] > (df.ma5)[0] and today['close'] > (df.ma10)[0] and today['close'] > (df.ma20)[0])):
 
             deep_stock_code2 = copy.deepcopy(stock_code)
@@ -221,6 +235,13 @@ for array in arrays:
                 connect.rollback()  # 发生错误时回滚
 
             print("********************===  抓到一个 一阳三线 了!====>>> %s ===**********************" % today.ts_code)
+        end = time.perf_counter()
+        # 计算运行时间
+        runTime = end - start
+        runTime_ms = runTime * 1000
+        # 输出运行时间
+        # print("运行时间：", runTime, "秒")
+        print("运行时间：", runTime_ms, "毫秒")
 
 #
 #
