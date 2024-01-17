@@ -46,6 +46,8 @@ print ("退出主线程")
 print ("Exiting Main Thread")
 
 if __name__ == '__main__':
+    print("退出主线程####")
+    print("###Exiting Main Thread")
     # 创建新线程
     thread1 = myThread(1, "Thread-1", 1)
     thread2 = myThread(2, "Thread-2", 2)
