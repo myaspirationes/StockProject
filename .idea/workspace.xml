@@ -1,0 +1,874 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1f307616-e799-4071-ae2f-648208c03eb6" name="Default Changelist" comment="2023 update" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_COMMON_BRANCH" value="master" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="SYNC" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/myaspirationes/StockProject" />
+      </set>
+    </option>
+  </component>
+  <component name="JupyterTrust" id="f5726af6-7106-4a54-9ba3-4cc70cedbd2c" />
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2EVk5P78NuQuQJ8Rja4RrLyGQeV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/BaiduNetdiskDownload/Python/StockProject&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;http.proxy&quot;
+  }
+}</component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="StockProject" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="StockProject" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\BaiduNetdiskDownload\Python\StockProject\venv\Lib\site-packages\PIL" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\BaiduNetdiskDownload\Python\StockProject\venv" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.seventeen">
+    <configuration name="g" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="StockProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Tiger\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/g.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="StockProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="seventeen" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="StockProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Tiger\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv/scrabble/cui" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/scrabble/cui/seventeen.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="sixteen" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="StockProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Tiger\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv/scrabble/cui" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/scrabble/cui/sixteen.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="thread" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="StockProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/thread.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tst" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="StockProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Tiger\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv/scrabble/cui" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/scrabble/cui/tst.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.seventeen" />
+      <item itemvalue="Python.tst" />
+      <item itemvalue="Python.sixteen" />
+      <item itemvalue="Python.g" />
+      <item itemvalue="Python.thread" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.seventeen" />
+        <item itemvalue="Python.g" />
+        <item itemvalue="Python.sixteen" />
+        <item itemvalue="Python.tst" />
+        <item itemvalue="Python.thread" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1f307616-e799-4071-ae2f-648208c03eb6" name="Default Changelist" comment="" />
+      <created>1662687954714</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1662687954714</updated>
+      <workItem from="1662688000942" duration="17159000" />
+      <workItem from="1662763234793" duration="33476000" />
+      <workItem from="1662945218809" duration="3013000" />
+      <workItem from="1662948271743" duration="14635000" />
+      <workItem from="1663030924833" duration="17174000" />
+      <workItem from="1663124634934" duration="10112000" />
+      <workItem from="1663163173963" duration="28000" />
+      <workItem from="1663163668480" duration="4620000" />
+      <workItem from="1663202768045" duration="12824000" />
+      <workItem from="1663241080790" duration="7201000" />
+      <workItem from="1663339072160" duration="19454000" />
+      <workItem from="1663466043582" duration="11625000" />
+      <workItem from="1663550478773" duration="10947000" />
+      <workItem from="1663626539590" duration="13591000" />
+      <workItem from="1663752500134" duration="3179000" />
+      <workItem from="1663811874704" duration="5537000" />
+      <workItem from="1663909188707" duration="10548000" />
+      <workItem from="1664158241136" duration="4790000" />
+      <workItem from="1664190024863" duration="16538000" />
+      <workItem from="1664331585331" duration="232000" />
+      <workItem from="1664331860076" duration="6673000" />
+      <workItem from="1664374128873" duration="678000" />
+      <workItem from="1664443480206" duration="5306000" />
+      <workItem from="1664543402401" duration="1010000" />
+      <workItem from="1665392772405" duration="1334000" />
+      <workItem from="1665394781339" duration="124000" />
+      <workItem from="1665394963158" duration="1025000" />
+      <workItem from="1665396210970" duration="100000" />
+      <workItem from="1665396346008" duration="71000" />
+      <workItem from="1665396460185" duration="35000" />
+      <workItem from="1665396642345" duration="47000" />
+      <workItem from="1665396703154" duration="31000" />
+      <workItem from="1665396805642" duration="74000" />
+      <workItem from="1665396933966" duration="270000" />
+      <workItem from="1665397225101" duration="15391000" />
+      <workItem from="1665538140587" duration="2809000" />
+      <workItem from="1665559813863" duration="2221000" />
+      <workItem from="1665634403138" duration="2752000" />
+      <workItem from="1665713603911" duration="308000" />
+      <workItem from="1665745506244" duration="2391000" />
+      <workItem from="1665997478964" duration="1246000" />
+      <workItem from="1666133079755" duration="13264000" />
+      <workItem from="1666189133274" duration="2517000" />
+      <workItem from="1666269851728" duration="2012000" />
+      <workItem from="1666318344578" duration="595000" />
+      <workItem from="1666325150204" duration="15477000" />
+      <workItem from="1666406589555" duration="3774000" />
+      <workItem from="1666610717179" duration="605000" />
+      <workItem from="1666690403109" duration="1858000" />
+      <workItem from="1666711278475" duration="1679000" />
+      <workItem from="1666760099755" duration="8729000" />
+      <workItem from="1666898894133" duration="1610000" />
+      <workItem from="1666925126689" duration="2653000" />
+      <workItem from="1667103314247" duration="3859000" />
+      <workItem from="1667383615308" duration="601000" />
+      <workItem from="1667439903705" duration="956000" />
+      <workItem from="1667468811759" duration="5927000" />
+      <workItem from="1667551503608" duration="8971000" />
+      <workItem from="1667871468138" duration="405000" />
+      <workItem from="1667871889146" duration="303000" />
+      <workItem from="1667872208655" duration="218000" />
+      <workItem from="1667872446795" duration="757000" />
+      <workItem from="1667875502978" duration="708000" />
+      <workItem from="1667876243244" duration="105000" />
+      <workItem from="1667876371580" duration="71000" />
+      <workItem from="1667876614415" duration="110000" />
+      <workItem from="1667877972489" duration="86000" />
+      <workItem from="1667878072265" duration="5524000" />
+      <workItem from="1667958569546" duration="2597000" />
+      <workItem from="1667971144048" duration="499000" />
+      <workItem from="1667990110667" duration="1216000" />
+      <workItem from="1668062361174" duration="5444000" />
+      <workItem from="1668159909396" duration="13981000" />
+      <workItem from="1668213192951" duration="1228000" />
+      <workItem from="1668250479064" duration="2461000" />
+      <workItem from="1668305907088" duration="3625000" />
+      <workItem from="1668392716398" duration="5688000" />
+      <workItem from="1668470950485" duration="3764000" />
+      <workItem from="1668565740348" duration="3788000" />
+      <workItem from="1668650219095" duration="611000" />
+      <workItem from="1668672879382" duration="1229000" />
+      <workItem from="1668761665625" duration="4026000" />
+      <workItem from="1668816904493" duration="821000" />
+      <workItem from="1668830480373" duration="1053000" />
+      <workItem from="1668921945333" duration="1294000" />
+      <workItem from="1668999424500" duration="5377000" />
+      <workItem from="1669122972711" duration="812000" />
+      <workItem from="1669173279051" duration="24912000" />
+      <workItem from="1669253873185" duration="18372000" />
+      <workItem from="1669299159122" duration="3367000" />
+      <workItem from="1669341115054" duration="17579000" />
+      <workItem from="1669627325874" duration="2738000" />
+      <workItem from="1669690000697" duration="1882000" />
+      <workItem from="1669711574814" duration="2321000" />
+      <workItem from="1669776892427" duration="1223000" />
+      <workItem from="1669791451438" duration="4315000" />
+      <workItem from="1669898487417" duration="1249000" />
+      <workItem from="1669971295470" duration="2093000" />
+      <workItem from="1670212606496" duration="3859000" />
+      <workItem from="1670317665649" duration="1287000" />
+      <workItem from="1670318981641" duration="360000" />
+      <workItem from="1670322890852" duration="9456000" />
+      <workItem from="1670398685919" duration="5979000" />
+      <workItem from="1670561860151" duration="17363000" />
+      <workItem from="1670598329042" duration="263000" />
+      <workItem from="1670836838375" duration="5770000" />
+      <workItem from="1670921767843" duration="806000" />
+      <workItem from="1670989000900" duration="3349000" />
+      <workItem from="1671089543250" duration="3286000" />
+      <workItem from="1671236621572" duration="7462000" />
+      <workItem from="1671437715718" duration="2709000" />
+      <workItem from="1671523522978" duration="2298000" />
+      <workItem from="1671615743056" duration="1319000" />
+      <workItem from="1671694218087" duration="10503000" />
+      <workItem from="1671854000356" duration="865000" />
+      <workItem from="1671960748729" duration="6619000" />
+      <workItem from="1672208177393" duration="172000" />
+      <workItem from="1672228964865" duration="1152000" />
+      <workItem from="1672571202729" duration="4107000" />
+      <workItem from="1672734476539" duration="6112000" />
+      <workItem from="1672827794019" duration="3152000" />
+      <workItem from="1672905307298" duration="4700000" />
+      <workItem from="1673000704307" duration="2472000" />
+      <workItem from="1673093962406" duration="1752000" />
+      <workItem from="1673145392485" duration="608000" />
+      <workItem from="1673262822618" duration="1595000" />
+      <workItem from="1673352169613" duration="2038000" />
+      <workItem from="1673494061039" duration="6057000" />
+      <workItem from="1673598614596" duration="1272000" />
+      <workItem from="1673862676038" duration="1684000" />
+      <workItem from="1673943724313" duration="3685000" />
+      <workItem from="1674193053995" duration="8167000" />
+      <workItem from="1674222402858" duration="2825000" />
+      <workItem from="1675069694779" duration="2476000" />
+      <workItem from="1675154739008" duration="3598000" />
+      <workItem from="1675229434193" duration="3374000" />
+      <workItem from="1675411730718" duration="4359000" />
+      <workItem from="1675484609879" duration="654000" />
+      <workItem from="1675672748397" duration="5777000" />
+      <workItem from="1675842908691" duration="7842000" />
+      <workItem from="1676020582388" duration="3501000" />
+      <workItem from="1676195516565" duration="598000" />
+      <workItem from="1676272361093" duration="4998000" />
+      <workItem from="1676343511863" duration="5438000" />
+      <workItem from="1676448102767" duration="6506000" />
+      <workItem from="1676516134804" duration="12764000" />
+      <workItem from="1676543188458" duration="2131000" />
+      <workItem from="1676597163632" duration="11199000" />
+      <workItem from="1676777283676" duration="5182000" />
+      <workItem from="1676864569877" duration="12611000" />
+      <workItem from="1676952677092" duration="3094000" />
+      <workItem from="1676974560330" duration="1247000" />
+      <workItem from="1677055959047" duration="717000" />
+      <workItem from="1677113205410" duration="1198000" />
+      <workItem from="1677145957518" duration="2473000" />
+      <workItem from="1677200258641" duration="3264000" />
+      <workItem from="1677334966801" duration="1371000" />
+      <workItem from="1677416222623" duration="2229000" />
+      <workItem from="1677476550247" duration="9256000" />
+      <workItem from="1677544510494" duration="16927000" />
+      <workItem from="1677657801925" duration="7676000" />
+      <workItem from="1677823927411" duration="5234000" />
+      <workItem from="1678095685096" duration="2040000" />
+      <workItem from="1678177266875" duration="2022000" />
+      <workItem from="1678241421542" duration="16517000" />
+      <workItem from="1678329662196" duration="13346000" />
+      <workItem from="1678416155071" duration="7767000" />
+      <workItem from="1678615405892" duration="1013000" />
+      <workItem from="1678692073485" duration="9408000" />
+      <workItem from="1678758735903" duration="8572000" />
+      <workItem from="1678863973488" duration="5872000" />
+      <workItem from="1678929766964" duration="1728000" />
+      <workItem from="1678952787374" duration="7843000" />
+      <workItem from="1679015065182" duration="9214000" />
+      <workItem from="1679299436134" duration="1699000" />
+      <workItem from="1679363649158" duration="1188000" />
+      <workItem from="1679386043380" duration="3089000" />
+      <workItem from="1679471788939" duration="13035000" />
+      <workItem from="1679619800162" duration="7982000" />
+      <workItem from="1679885676278" duration="13771000" />
+      <workItem from="1679968158002" duration="4988000" />
+      <workItem from="1680076223843" duration="4241000" />
+      <workItem from="1680139346874" duration="5288000" />
+      <workItem from="1680227220160" duration="2678000" />
+      <workItem from="1680251439727" duration="3652000" />
+      <workItem from="1680311613536" duration="3514000" />
+      <workItem from="1680487328750" duration="2930000" />
+      <workItem from="1680569594946" duration="5378000" />
+      <workItem from="1680653748886" duration="594000" />
+      <workItem from="1680703295051" duration="611000" />
+      <workItem from="1680761780091" duration="790000" />
+      <workItem from="1680774044984" duration="3909000" />
+      <workItem from="1680826516774" duration="5210000" />
+      <workItem from="1680859562859" duration="1245000" />
+      <workItem from="1680923092003" duration="1426000" />
+      <workItem from="1681011076346" duration="1188000" />
+      <workItem from="1681091305162" duration="2313000" />
+      <workItem from="1681115308750" duration="6915000" />
+      <workItem from="1681168591077" duration="3182000" />
+      <workItem from="1681260484955" duration="4979000" />
+      <workItem from="1681347988586" duration="15460000" />
+      <workItem from="1681439653211" duration="2971000" />
+      <workItem from="1681651696965" duration="991000" />
+      <workItem from="1681693429095" duration="3608000" />
+      <workItem from="1681806998759" duration="3416000" />
+      <workItem from="1681892103962" duration="3249000" />
+      <workItem from="1681951355704" duration="952000" />
+      <workItem from="1681977984263" duration="2824000" />
+      <workItem from="1682052834782" duration="2668000" />
+      <workItem from="1682338597895" duration="923000" />
+      <workItem from="1682395718675" duration="3928000" />
+      <workItem from="1682492713583" duration="3454000" />
+      <workItem from="1682590169035" duration="1071000" />
+      <workItem from="1682686273956" duration="2672000" />
+      <workItem from="1683195278471" duration="4080000" />
+      <workItem from="1683276482634" duration="4145000" />
+      <workItem from="1683533567206" duration="1245000" />
+      <workItem from="1683710178683" duration="245000" />
+      <workItem from="1683714151897" duration="635000" />
+      <workItem from="1683807784628" duration="2893000" />
+      <workItem from="1684209018239" duration="11657000" />
+      <workItem from="1684310066467" duration="94000" />
+      <workItem from="1684310185371" duration="3202000" />
+      <workItem from="1684409289431" duration="2490000" />
+      <workItem from="1684486055148" duration="41000" />
+      <workItem from="1684569990564" duration="3880000" />
+      <workItem from="1684748796859" duration="42000" />
+      <workItem from="1684757411949" duration="1259000" />
+      <workItem from="1684827710328" duration="4361000" />
+      <workItem from="1684847495744" duration="3047000" />
+      <workItem from="1684896588965" duration="15068000" />
+      <workItem from="1684941527089" duration="176000" />
+      <workItem from="1684970057690" duration="5643000" />
+      <workItem from="1685020640792" duration="2943000" />
+      <workItem from="1685091075235" duration="948000" />
+      <workItem from="1685282075845" duration="2933000" />
+      <workItem from="1685322869211" duration="3692000" />
+      <workItem from="1685431180226" duration="1274000" />
+      <workItem from="1685840169376" duration="2179000" />
+      <workItem from="1685941463184" duration="2208000" />
+      <workItem from="1686098945747" duration="5182000" />
+      <workItem from="1686565534323" duration="625000" />
+      <workItem from="1686649467473" duration="1250000" />
+      <workItem from="1686818922474" duration="1181000" />
+      <workItem from="1687182848884" duration="672000" />
+      <workItem from="1687236236286" duration="5126000" />
+      <workItem from="1687335374532" duration="1367000" />
+      <workItem from="1687667779605" duration="8456000" />
+      <workItem from="1687743500073" duration="6056000" />
+      <workItem from="1687834534786" duration="6416000" />
+      <workItem from="1687914795819" duration="1932000" />
+      <workItem from="1687922270820" duration="596000" />
+      <workItem from="1687936081387" duration="5949000" />
+      <workItem from="1688024336879" duration="4327000" />
+      <workItem from="1688085732371" duration="5078000" />
+      <workItem from="1688379782119" duration="26000" />
+      <workItem from="1688469040781" duration="18000" />
+      <workItem from="1688469999640" duration="6371000" />
+      <workItem from="1688520686229" duration="7971000" />
+      <workItem from="1688636841944" duration="544000" />
+      <workItem from="1688710635402" duration="529000" />
+      <workItem from="1688712120766" duration="53000" />
+      <workItem from="1688712186723" duration="367000" />
+      <workItem from="1688712576830" duration="302000" />
+      <workItem from="1688738544113" duration="93000" />
+      <workItem from="1688977427666" duration="1196000" />
+      <workItem from="1689076856399" duration="625000" />
+      <workItem from="1689082753556" duration="594000" />
+      <workItem from="1689123392033" duration="732000" />
+      <workItem from="1689241328939" duration="1830000" />
+      <workItem from="1689603119600" duration="714000" />
+      <workItem from="1689758350414" duration="623000" />
+      <workItem from="1690187002486" duration="1409000" />
+      <workItem from="1690384062635" duration="628000" />
+      <workItem from="1690454388430" duration="2549000" />
+      <workItem from="1690531817458" duration="1208000" />
+      <workItem from="1690796230245" duration="142000" />
+      <workItem from="1690796791724" duration="228000" />
+      <workItem from="1690797045426" duration="197000" />
+      <workItem from="1690797260356" duration="129000" />
+      <workItem from="1690797405073" duration="123000" />
+      <workItem from="1690797541614" duration="1365000" />
+      <workItem from="1690859508252" duration="336000" />
+      <workItem from="1690880172630" duration="112000" />
+      <workItem from="1690880306540" duration="191000" />
+      <workItem from="1690880509237" duration="1277000" />
+      <workItem from="1691052006797" duration="40000" />
+      <workItem from="1691134843129" duration="657000" />
+      <workItem from="1691204313019" duration="3007000" />
+      <workItem from="1691369804971" duration="3089000" />
+      <workItem from="1691507583184" duration="603000" />
+      <workItem from="1691595416719" duration="1806000" />
+      <workItem from="1691598739771" duration="382000" />
+      <workItem from="1691599739116" duration="37000" />
+      <workItem from="1692003540719" duration="1726000" />
+      <workItem from="1692005872597" duration="1375000" />
+      <workItem from="1692633292419" duration="82000" />
+      <workItem from="1692960680685" duration="34000" />
+      <workItem from="1692960815187" duration="1533000" />
+      <workItem from="1693316799082" duration="1312000" />
+      <workItem from="1693390854994" duration="1658000" />
+      <workItem from="1693467691005" duration="246000" />
+      <workItem from="1693581655354" duration="382000" />
+      <workItem from="1693814938302" duration="2002000" />
+      <workItem from="1693985963889" duration="648000" />
+      <workItem from="1693990414563" duration="1687000" />
+      <workItem from="1694098385317" duration="53000" />
+      <workItem from="1694433866267" duration="600000" />
+      <workItem from="1694500294536" duration="2451000" />
+      <workItem from="1694830342032" duration="612000" />
+      <workItem from="1695130653840" duration="750000" />
+      <workItem from="1695302617104" duration="2507000" />
+      <workItem from="1695632161461" duration="77000" />
+      <workItem from="1695632253317" duration="6303000" />
+      <workItem from="1695822452065" duration="1260000" />
+      <workItem from="1696583080620" duration="911000" />
+      <workItem from="1696818393264" duration="2169000" />
+      <workItem from="1696924535946" duration="2405000" />
+      <workItem from="1697373618113" duration="1207000" />
+      <workItem from="1697770722538" duration="3261000" />
+      <workItem from="1698633752207" duration="1828000" />
+      <workItem from="1698761132817" duration="621000" />
+      <workItem from="1698922029624" duration="634000" />
+      <workItem from="1699007127016" duration="631000" />
+      <workItem from="1699358068833" duration="660000" />
+      <workItem from="1699453203401" duration="617000" />
+      <workItem from="1699502059080" duration="239000" />
+      <workItem from="1699531007179" duration="250000" />
+      <workItem from="1699597505458" duration="593000" />
+      <workItem from="1699619552058" duration="6660000" />
+      <workItem from="1699664835928" duration="1527000" />
+      <workItem from="1699669137167" duration="1024000" />
+      <workItem from="1699675881799" duration="1803000" />
+      <workItem from="1699678030903" duration="1312000" />
+      <workItem from="1699707098084" duration="5266000" />
+      <workItem from="1699875640033" duration="836000" />
+      <workItem from="1699941290077" duration="2167000" />
+      <workItem from="1700032083254" duration="4810000" />
+      <workItem from="1700237907995" duration="38000" />
+      <workItem from="1700270602142" duration="296000" />
+      <workItem from="1700270911327" duration="4199000" />
+      <workItem from="1700366964287" duration="60000" />
+      <workItem from="1700480947723" duration="1020000" />
+      <workItem from="1700539914941" duration="11548000" />
+      <workItem from="1700656087177" duration="1759000" />
+      <workItem from="1700723009203" duration="739000" />
+      <workItem from="1701084817217" duration="727000" />
+      <workItem from="1701085622941" duration="1769000" />
+      <workItem from="1701135905995" duration="1968000" />
+      <workItem from="1701266413010" duration="538000" />
+      <workItem from="1701267276747" duration="1282000" />
+      <workItem from="1701338498973" duration="1977000" />
+      <workItem from="1701393317984" duration="1275000" />
+      <workItem from="1701495842707" duration="1143000" />
+      <workItem from="1701789096011" duration="806000" />
+      <workItem from="1701955737234" duration="801000" />
+      <workItem from="1702033219119" duration="75000" />
+      <workItem from="1702033312497" duration="556000" />
+      <workItem from="1702033916689" duration="234000" />
+      <workItem from="1702034165846" duration="152000" />
+      <workItem from="1702034343304" duration="2524000" />
+      <workItem from="1702100689536" duration="1415000" />
+      <workItem from="1702114192879" duration="142000" />
+      <workItem from="1702114347018" duration="1922000" />
+      <workItem from="1702116805461" duration="25000" />
+      <workItem from="1702116841593" duration="690000" />
+      <workItem from="1702117779660" duration="1826000" />
+      <workItem from="1702269940158" duration="2581000" />
+      <workItem from="1702395260968" duration="291000" />
+      <workItem from="1702437186642" duration="4006000" />
+      <workItem from="1702524635454" duration="4301000" />
+      <workItem from="1702607306919" duration="4310000" />
+      <workItem from="1702985261009" duration="1920000" />
+      <workItem from="1703064735458" duration="686000" />
+      <workItem from="1703138646188" duration="5109000" />
+      <workItem from="1703330011912" duration="2673000" />
+      <workItem from="1703339791506" duration="1146000" />
+      <workItem from="1703340958182" duration="780000" />
+      <workItem from="1703341833917" duration="5237000" />
+      <workItem from="1703381132219" duration="1294000" />
+      <workItem from="1703499236550" duration="15651000" />
+      <workItem from="1703759990603" duration="2027000" />
+      <workItem from="1703842555297" duration="781000" />
+      <workItem from="1704159781727" duration="2740000" />
+      <workItem from="1704291086109" duration="829000" />
+      <workItem from="1704371875082" duration="827000" />
+      <workItem from="1704463472755" duration="1302000" />
+      <workItem from="1704721839481" duration="891000" />
+      <workItem from="1704777611332" duration="13410000" />
+      <workItem from="1705027700808" duration="12973000" />
+      <workItem from="1705303432383" duration="1211000" />
+      <workItem from="1705460934821" duration="1801000" />
+      <workItem from="1705465988346" duration="9364000" />
+      <workItem from="1705480692292" duration="4614000" />
+      <workItem from="1705560900189" duration="2783000" />
+    </task>
+    <task id="LOCAL-00001" summary="add useful">
+      <created>1663679501309</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1663679501309</updated>
+    </task>
+    <task id="LOCAL-00002" summary="优化跳空高开、一阳三线，3倍股的获取方式 新建 getSkipBreakTriple.py文件">
+      <created>1664205633333</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1664205633333</updated>
+    </task>
+    <task id="LOCAL-00003" summary="优化跳空高开、一阳三线，3倍股的获取方式 新建 getSkipBreakTriple.py文件">
+      <created>1667878512878</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1667878512878</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add spider for change 3 5 10 day stock info">
+      <created>1668178472414</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1668178472414</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add spider for change 3 5 10 day stock info">
+      <created>1671237836819</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1671237836819</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add fmc mc">
+      <created>1679620326633</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1679620326634</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add new page  and fix  bugs">
+      <created>1681439729236</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1681439729236</updated>
+    </task>
+    <task id="LOCAL-00008" summary="add new page  and fix  bugs">
+      <created>1681440153056</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1681440153056</updated>
+    </task>
+    <task id="LOCAL-00009" summary="2023 update">
+      <created>1699669294010</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1699669294010</updated>
+    </task>
+    <task id="LOCAL-00010" summary="2023 update">
+      <created>1705478142334</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1705478142334</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add useful" />
+    <MESSAGE value="优化跳空高开、一阳三线，3倍股的获取方式 新建 getSkipBreakTriple.py文件" />
+    <MESSAGE value="add spider for change 3 5 10 day stock info" />
+    <MESSAGE value="add fmc mc" />
+    <MESSAGE value="add new page  and fix  bugs" />
+    <MESSAGE value="2023 update" />
+    <option name="LAST_COMMIT_MESSAGE" value="2023 update" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/getSkipStock.py</url>
+          <line>22</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/dict_to_mysql.py</url>
+          <line>7</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/getSkipBreakTriple.py</url>
+          <line>180</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/g.py</url>
+          <line>213</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/g.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/g.py</url>
+          <line>489</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/g.py</url>
+          <line>180</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/g.py</url>
+          <line>288</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/g.py</url>
+          <line>198</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/StockProject$demo14.coverage" NAME="demo14 Coverage Results" MODIFIED="1703569248466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$demo17.coverage" NAME="demo17 Coverage Results" MODIFIED="1703569490909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$demo11.coverage" NAME="demo11 Coverage Results" MODIFIED="1703565788795" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$getSkipStock.coverage" NAME="getSkipStock Coverage Results" MODIFIED="1678444897148" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$getStockData.coverage" NAME="getStockData Coverage Results" MODIFIED="1683276498743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$demo20.coverage" NAME="demo20 Coverage Results" MODIFIED="1703569591347" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$demo1.coverage" NAME="demo1 Coverage Results" MODIFIED="1703562575069" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$dict_to_mysql__1_.coverage" NAME="dict_to_mysql (1) Coverage Results" MODIFIED="1666900254694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$demo4.coverage" NAME="demo4 Coverage Results" MODIFIED="1703339055872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$thread_queue.coverage" NAME="thread_queue Coverage Results" MODIFIED="1676791877375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$g.coverage" NAME="g Coverage Results" MODIFIED="1705478701679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$demo7.coverage" NAME="demo7 Coverage Results" MODIFIED="1703563315345" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$get_all_stocks.coverage" NAME="get_all_stocks Coverage Results" MODIFIED="1681118735161" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$dict_to_mysql.coverage" NAME="dict_to_mysql Coverage Results" MODIFIED="1678285337441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$list.coverage" NAME="list Coverage Results" MODIFIED="1681354446544" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$html_spider.coverage" NAME="html_spider Coverage Results" MODIFIED="1699502267462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$main.coverage" NAME="main Coverage Results" MODIFIED="1701789926444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/StockProject$proxy.coverage" NAME="proxy Coverage Results" MODIFIED="1703645455817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$demo13.coverage" NAME="demo13 Coverage Results" MODIFIED="1703569225250" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$demo18.coverage" NAME="demo18 Coverage Results" MODIFIED="1703569551683" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$dbtrance.coverage" NAME="dbtrance Coverage Results" MODIFIED="1680269230747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$demo8.coverage" NAME="demo8 Coverage Results" MODIFIED="1703564998849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$CrackCaptcha.coverage" NAME="CrackCaptcha Coverage Results" MODIFIED="1703330084132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$data_strance.coverage" NAME="data_strance Coverage Results" MODIFIED="1683282197119" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$demo3.coverage" NAME="demo3 Coverage Results" MODIFIED="1703561387656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$demo19.coverage" NAME="demo19 Coverage Results" MODIFIED="1703343454533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$getSkip.coverage" NAME="getSkip Coverage Results" MODIFIED="1678353816415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$mogo_pyquery.coverage" NAME="mogo_pyquery Coverage Results" MODIFIED="1687701999382" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble" />
+    <SUITE FILE_PATH="coverage/StockProject$sixteen.coverage" NAME="sixteen Coverage Results" MODIFIED="1705477247794" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/cui" />
+    <SUITE FILE_PATH="coverage/StockProject$seventeen.coverage" NAME="seventeen Coverage Results" MODIFIED="1705559675505" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/cui" />
+    <SUITE FILE_PATH="coverage/StockProject$getSkipBreakTriple.coverage" NAME="getSkipBreakTriple Coverage Results" MODIFIED="1684941050882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$ajax_spider.coverage" NAME="ajax_spider Coverage Results" MODIFIED="1702644594849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble" />
+    <SUITE FILE_PATH="coverage/StockProject$demo9.coverage" NAME="demo9 Coverage Results" MODIFIED="1703565023458" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$tst.coverage" NAME="tst Coverage Results" MODIFIED="1705477131419" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/cui" />
+    <SUITE FILE_PATH="coverage/StockProject$tushareAPI.coverage" NAME="tushareAPI Coverage Results" MODIFIED="1684828030843" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$threeTimesVol.coverage" NAME="threeTimesVol Coverage Results" MODIFIED="1663341645816" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$spider.coverage" NAME="spider Coverage Results" MODIFIED="1685002424419" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$string.coverage" NAME="string Coverage Results" MODIFIED="1664189891372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$weibo_ablum.coverage" NAME="weibo_ablum Coverage Results" MODIFIED="1695709918164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$demo15.coverage" NAME="demo15 Coverage Results" MODIFIED="1703569316204" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$demo12.coverage" NAME="demo12 Coverage Results" MODIFIED="1703571434427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$login.coverage" NAME="login Coverage Results" MODIFIED="1703381803475" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$demo21.coverage" NAME="demo21 Coverage Results" MODIFIED="1703569606716" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$demo5.coverage" NAME="demo5 Coverage Results" MODIFIED="1703562528413" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$clock.coverage" NAME="clock Coverage Results" MODIFIED="1703764758009" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$demo10.coverage" NAME="demo10 Coverage Results" MODIFIED="1703565039442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$get_data.coverage" NAME="get_data Coverage Results" MODIFIED="1685433374159" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$map.coverage" NAME="map Coverage Results" MODIFIED="1666408007284" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$demo6.coverage" NAME="demo6 Coverage Results" MODIFIED="1703563199459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$thread.coverage" NAME="thread Coverage Results" MODIFIED="1704784110048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/StockProject$twoNumberAdd.coverage" NAME="twoNumberAdd Coverage Results" MODIFIED="1672741157101" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/LeeCodes" />
+    <SUITE FILE_PATH="coverage/StockProject$renqi.coverage" NAME="renqi Coverage Results" MODIFIED="1671964234415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/share" />
+    <SUITE FILE_PATH="coverage/StockProject$demo16.coverage" NAME="demo16 Coverage Results" MODIFIED="1703569386186" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/scrabble/SeleniumTest" />
+    <SUITE FILE_PATH="coverage/StockProject$test.coverage" NAME="test Coverage Results" MODIFIED="1680312202698" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/LeeCodes" />
+    <SUITE FILE_PATH="coverage/StockProject$hotstock.coverage" NAME="hotstock Coverage Results" MODIFIED="1685002428619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>

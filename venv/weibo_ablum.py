@@ -85,6 +85,7 @@ def get_weibo_picture(uid):
 
 
 if __name__ == '__main__':
+
     path = f'D:/Downloads/weibo/{uid}'
     if not os.path.exists(path):
         os.makedirs(path)
